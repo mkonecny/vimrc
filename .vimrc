@@ -17,8 +17,6 @@ syntax enable
 
 set noerrorbells novisualbell t_vb=
 "indentation
-set shiftwidth=2
-set tabstop=2
 "gui
 set guioptions-=r
 set guioptions-=T
@@ -26,6 +24,9 @@ set guioptions-=l
 set go-=R
 set go-=L
 set tags=./tags
+setlocal spell spelllang=en_us
+set spell
+set complete-=i "make completion ignore modules in the file system
 
 filetype off
 
@@ -38,6 +39,8 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'ervandew/supertab'
 Bundle 'altercation/vim-colors-solarized'
+" perl-support bundle somehow messes up with indentation somehow
+Bundle 'vim-scripts/perl-support.vim'
 Bundle 'rson/vim-conque'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
@@ -51,11 +54,14 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'jpalardy/vim-slime'
-Bundle 'xolog/vim-easytags'
+"Bundle 'xolog/vim-easytags'
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
-
+"Bundle 'torandu/vim-bufexplorer'
+Bundle 'fholgado/minibufexpl.vim'
+Bundle 'vim-scripts/snippetsEmu'
+Bundle 'vim-scripts/snippetsEmu-bundles'
 
 filetype plugin indent on
 
@@ -89,6 +95,7 @@ vnoremap <silent> <C-f><C-b> :FufAddBookmarkAsSelectedText<CR>
 nnoremap <silent> <C-f><C-e> :FufEditInfo<CR>
 nnoremap <silent> <C-f><C-r> :FufRenewCache<CR>
 
+nnoremap <silent> <F2> :silent noh<CR>
 nnoremap <silent> <C-F5> :Errors<CR>
 nnoremap <silent> <F3> :BD<CR>
 nnoremap <silent> <C-F4> :NERDTree<CR>
@@ -98,9 +105,9 @@ nnoremap <silent> <C-F4> :NERDTree<CR>
 set background=dark
 
 if has('gui_running')
-	colorscheme railscasts
+  colorscheme railscasts
 else
-	colorscheme solarized
+  colorscheme solarized
 endif
 
 set guifont=DejaVu\ Sans\ Mono\ 10
@@ -108,6 +115,13 @@ let g:syntastic_enable_highlighting=1
 let g:syntastic_enable_signs=1
 let g:slime_target = "tmux"
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+
+"minibufexplr settings
+let g:miniBufExplMapWindowNavVim = 1 
+let g:miniBufExplMapWindowNavArrows = 1 
+let g:miniBufExplMapCTabSwitchBufs = 1 
+let g:miniBufExplModSelTarget = 1 
+
 "let g:EasyMotion_leader_key = ''
 
 "abbreviations
@@ -117,3 +131,12 @@ iabbrev foudn found
 iabbrev tahn than
 iabbrev shoulld should
 iabbrev bottmo bottom
+iabbrev teh the
+iabbrev packge package
+iabbrev seperate separate
+iabbrev storign storing
+
+
+set shiftwidth=2
+set tabstop=2
+set expandtab
