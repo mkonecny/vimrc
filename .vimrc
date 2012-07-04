@@ -28,7 +28,7 @@ setlocal spell spelllang=en_us
 set spell
 set complete-=i "make completion ignore modules in the file system
 
-"Vundle styff"{{{
+"Vundle stuff"{{{
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
@@ -230,6 +230,7 @@ call SetupVAM()
 " option2:  au GUIEnter * call SetupVAM()
 " See BUGS sections below [*]
 " Vim 7.0 users see BUGS section [3]
+" Uncomment the next line to use vim-addon-manager
 call vam#ActivateAddons(["vim-addon-ocaml"], {'auto_install' : 1})
 "}}}
 
