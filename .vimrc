@@ -2,6 +2,7 @@ set nocompatible
 set hidden
 set wildmenu
 set showcmd
+set incsearch
 set hlsearch
 set ignorecase
 set smartcase
@@ -14,7 +15,6 @@ set cursorline
 set autochdir " automatically change the directory to the current working file
 set t_Co=256
 syntax enable
-
 set noerrorbells novisualbell t_vb=
 "indentation
 "gui
@@ -32,12 +32,17 @@ set complete-=i "make completion ignore modules in the file system
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
+Bundle 'hickop'
+Bundle 'oceandeep'
+Bundle 'ciaranm/inkpot'
+Bundle 'darktango.vim'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'ervandew/supertab'
 Bundle 'altercation/vim-colors-solarized'
 " perl-support bundle somehow messes up with indentation somehow
 Bundle 'vim-scripts/perl-support.vim'
+Bundle 'klen/python-mode'
 Bundle 'rson/vim-conque'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
@@ -47,7 +52,8 @@ Bundle 'tpope/vim-rails'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'Lokaltog/vim-easymotion'
+Bundle 'therubymug/vim-pyte'
+"Bundle 'Lokaltog/vim-easymotion'
 Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'jpalardy/vim-slime'
@@ -108,7 +114,7 @@ vnoremap <F5> zf
 "color theme settings"{{{
 set background=dark
 if has('gui_running')
-  colorscheme railscasts
+  colorscheme oceandeep
 else
   colorscheme solarized
 endif
@@ -131,7 +137,7 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 "}}}
-"let g:EasyMotion_leader_key = ''
+let g:EasyMotion_leader_key = ''
 "abbreviations"{{{
 iabbrev pust puts
 iabbrev coutn count
@@ -152,8 +158,9 @@ iabbrev p_el print_endline
 iabbrev dependacies dependencies
 iabbrev dependancies dependencies
 "}}}
-"set tabstop=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 set nowrap
 set wrapmargin=0
@@ -236,3 +243,4 @@ call vam#ActivateAddons(["vim-addon-ocaml"], {'auto_install' : 1})
 
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
+set ofu=syntaxcomplete#Complete
