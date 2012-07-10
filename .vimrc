@@ -12,7 +12,7 @@ set mouse=a
 set t_vb=
 set nobackup
 set cursorline
-set autochdir " automatically change the directory to the current working file
+set noautochdir " automatically change the directory to the current working file
 set t_Co=256
 syntax enable
 set noerrorbells novisualbell t_vb=
@@ -29,6 +29,7 @@ set spell
 set complete-=i "make completion ignore modules in the file system
 
 "Vundle stuff"{{{
+let g:vundle_default_git_proto = 'git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
@@ -38,6 +39,12 @@ Bundle 'ciaranm/inkpot'
 Bundle 'darktango.vim'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
+Bundle 'mirell/vim-matchit'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
+Bundle 'majutsushi/tagbar'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/snipmate-snippets'
 Bundle 'ervandew/supertab'
 Bundle 'altercation/vim-colors-solarized'
 " perl-support bundle somehow messes up with indentation somehow
@@ -63,10 +70,11 @@ Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
 "Bundle 'torandu/vim-bufexplorer'
 "Bundle 'fholgado/minibufexpl.vim'
-Bundle 'vim-scripts/snippetsEmu'
-Bundle 'vim-scripts/snippetsEmu-bundles'
+"Bundle 'vim-scripts/snippetsEmu'
+"Bundle 'vim-scripts/snippetsEmu-bundles'
 Bundle 'pangloss/vim-javascript'
 Bundle 'LStinson/perlhelp-vim'
+Bundle 'skammer/vim-css-color'
 "}}}
 filetype plugin indent on
 
@@ -105,6 +113,7 @@ nnoremap <silent> <F2> :silent noh<CR>
 nnoremap <silent> <C-F5> :Errors<CR>
 nnoremap <silent> <F3> :BD<CR>
 nnoremap <silent> <C-F4> :NERDTree<CR>
+nnoremap <silent> <F6> :TagbarToggle<CR>
 inoremap <F5> <C-O>za
 nnoremap <F5> za
 onoremap <F5> <C-C>za
@@ -114,7 +123,7 @@ vnoremap <F5> zf
 "color theme settings"{{{
 set background=dark
 if has('gui_running')
-  colorscheme oceandeep
+  colorscheme hickop
 else
   colorscheme solarized
 endif
@@ -125,6 +134,9 @@ let g:syntastic_enable_highlighting=1
 let g:syntastic_enable_signs=1
 let g:slime_target = "tmux"
 let g:ackprg="ack -H --nocolor --nogroup --column"
+
+let g:pymode_lint_write = 0
+let g:pymode_run_key = 'R'
 
 "minibufexplr settings"{{{
 let g:miniBufExplMapWindowNavVim = 1 
