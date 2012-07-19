@@ -1,5 +1,6 @@
 set nocompatible
 set hidden
+set encoding=utf-8
 set wildmenu
 set showcmd
 set incsearch
@@ -186,6 +187,7 @@ iabbrev aroudn around
 iabbrev p_el print_endline
 iabbrev dependacies dependencies
 iabbrev dependancies dependencies
+iabbrev ibp import ipdb; ipdb.set_trace()
 "}}}
 set tabstop=4
 set shiftwidth=4
@@ -274,4 +276,5 @@ autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType python set nonu
 set ofu=syntaxcomplete#Complete
-
+set nonumber
+autocmd FileType * set nonumber
