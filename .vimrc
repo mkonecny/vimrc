@@ -60,7 +60,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'therubymug/vim-pyte'
-"Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'jpalardy/vim-slime'
@@ -113,11 +113,29 @@ nnoremap <silent> <F2> :silent noh<CR>
 nnoremap <silent> <C-F5> :Errors<CR>
 nnoremap <silent> <F3> :BD<CR>
 nnoremap <silent> <C-F4> :NERDTree<CR>
-nnoremap <silent> <F6> :TagbarToggle<CR>
 inoremap <F5> <C-O>za
 nnoremap <F5> za
 onoremap <F5> <C-C>za
 vnoremap <F5> zf
+nnoremap <silent> <F6> :TagbarToggle<CR>
+map <silent> <F7> :call ToggleFold()<CR>
+let g:EasyMotion_leader_key = '<F12>'
+nnoremap ,cd :cd %:p:h<CR>
+nnoremap ,el yy:! <C-R><C-0><BS><CR>
+"}}}
+"{{{ folding toggle function
+let g:FoldMethod = 1
+fun! ToggleFold()
+    if g:FoldMethod == 0
+        exe 'set foldmethod=indent'
+        let g:FoldMethod = 1
+        echo 'indent'
+    else
+        exe 'set foldmethod=marker'
+        let g:FoldMethod = 0
+        echo 'marker'
+    endif
+endfun
 "}}}
 
 "color theme settings"{{{
@@ -149,7 +167,6 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 "}}}
-let g:EasyMotion_leader_key = ''
 "abbreviations"{{{
 iabbrev pust puts
 iabbrev coutn count
@@ -177,7 +194,7 @@ set expandtab
 set nowrap
 set wrapmargin=0
 set textwidth=0
-set foldmethod=marker
+set foldmethod=indent
 "{{{ VAM
 fun! EnsureVamIsOnDisk(vam_install_path)
   " windows users may want to use http://mawercer.de/~marc/vam/index.php
@@ -255,4 +272,6 @@ call vam#ActivateAddons(["vim-addon-ocaml"], {'auto_install' : 1})
 
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
+autocmd FileType python set nonu
 set ofu=syntaxcomplete#Complete
+
