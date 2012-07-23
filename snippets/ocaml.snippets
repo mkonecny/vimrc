@@ -1,5 +1,13 @@
 # Ripped off markusm mottl's ocaml snippets
 
+snippet try
+	try ${1:e}
+	with ${2:Not_found} -> ${3:()}
+
+snippet ref
+	let ${1:name} = ref ${2:val} in
+	${3:e}
+
 snippet ml
 	module ${1:Mod} = ${2:Functor}(${3:Arg})
 
@@ -27,6 +35,18 @@ snippet amap
 
 snippet lmap
 	${1:list} |> List.map ${2:f}
+
+snippet filter
+	${1:var} |> ${2:List}.filter ${3:f}
+
+snippet efilter
+	${1:enum} |> Enum.filter ${2:f}
+
+snippet afilter
+	${1:array} |> Array.filter ${2:f}
+
+snippet lfilter
+	${1:list} |> List.filter ${2:f}
 
 # comment
 snippet cc
