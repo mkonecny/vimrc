@@ -43,6 +43,9 @@ Bundle 'mirell/vim-matchit'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'snipmate-snippets'
 Bundle 'garbas/vim-snipmate'
 Bundle 'honza/snipmate-snippets'
 Bundle 'ervandew/supertab'
@@ -120,7 +123,9 @@ vnoremap <F5> zf
 nnoremap <silent> <F6> :TagbarToggle<CR>
 map <silent> <F7> :call ToggleFold()<CR>
 let g:EasyMotion_leader_key = '<F12>'
+"cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
+"Execute the line under the cursor
 nnoremap ,el yy:! <C-R><C-0><BS><CR>
 "}}}
 "{{{ folding toggle function
@@ -183,9 +188,19 @@ iabbrev defautl default
 iabbrev lazy_buidl lazy_build
 iabbrev metclass metaclass
 iabbrev aroudn around
+iabbrev xcept except
+iabbrev excetp except
+iabbrev buidl build
 iabbrev p_el print_endline
 iabbrev dependacies dependencies
 iabbrev dependancies dependencies
+iabbrev pfpf Printf.printf
+iabbrev let_ let _ =
+iabbrev letu let () = 
+iabbrev iofs int_of_string
+iabbrev sofi string_of_int
+iabbrev fofs float_of_string
+iabbrev sofs string_of_float
 "}}}
 set tabstop=4
 set shiftwidth=4
@@ -272,6 +287,8 @@ call vam#ActivateAddons(["vim-addon-ocaml"], {'auto_install' : 1})
 
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
+autocmd FileType ocaml nnoremap ,cc T*ct*
+
 autocmd FileType python set nonu
 set ofu=syntaxcomplete#Complete
 
