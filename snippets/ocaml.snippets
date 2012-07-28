@@ -1,5 +1,9 @@
 # Ripped off markusm mottl's ocaml snippets
 
+snippet open
+	let open ${1:module} in
+	${2:e}
+
 snippet try
 	try ${1:e}
 	with ${2:Not_found} -> ${3:()}

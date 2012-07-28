@@ -1,6 +1,5 @@
 set nocompatible
 set hidden
-set encoding=utf-8
 set wildmenu
 set showcmd
 set incsearch
@@ -202,7 +201,6 @@ iabbrev iofs int_of_string
 iabbrev sofi string_of_int
 iabbrev fofs float_of_string
 iabbrev sofs string_of_float
-iabbrev ibp import ipdb; ipdb.set_trace()
 "}}}
 set tabstop=4
 set shiftwidth=4
@@ -293,5 +291,4 @@ autocmd FileType ocaml nnoremap ,cc T*ct*
 
 autocmd FileType python set nonu
 set ofu=syntaxcomplete#Complete
-set nonumber
-autocmd FileType * set nonumber
+
