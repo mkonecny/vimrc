@@ -127,6 +127,7 @@ let g:EasyMotion_leader_key = '<F12>'
 nnoremap ,cd :cd %:p:h<CR>
 "Execute the line under the cursor
 nnoremap ,el yy:! <C-R><C-0><BS><CR>
+nnoremap ,st B"1dt,EbdwbPEl"1pi <ESC>
 "}}}
 "{{{ folding toggle function
 let g:FoldMethod = 1
@@ -152,7 +153,7 @@ else
 endif
 "}}}
 
-set guifont=DejaVu\ Sans\ Mono\ 10
+set guifont=Inconsolata\ Medium\ 11
 let g:syntastic_enable_highlighting=1
 let g:syntastic_enable_signs=1
 let g:slime_target = "tmux"
@@ -201,6 +202,7 @@ iabbrev iofs int_of_string
 iabbrev sofi string_of_int
 iabbrev fofs float_of_string
 iabbrev sofs string_of_float
+iabbrev ibp import ipdb; ipdb.set_trace()
 "}}}
 set tabstop=4
 set shiftwidth=4
@@ -288,7 +290,9 @@ call vam#ActivateAddons(["vim-addon-ocaml"], {'auto_install' : 1})
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,cc T*ct*
-
 autocmd FileType python set nonu
 set ofu=syntaxcomplete#Complete
 
+set nonumber
+autocmd FileType * set nonumber
+set nosol
