@@ -33,6 +33,7 @@ let g:vundle_default_git_proto = 'git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
+Bundle 'danro/rename.vim'
 Bundle 'hickop'
 Bundle 'oceandeep'
 Bundle 'ciaranm/inkpot'
@@ -121,7 +122,11 @@ nnoremap <F5> za
 onoremap <F5> <C-C>za
 vnoremap <F5> zf
 nnoremap <silent> <F6> :TagbarToggle<CR>
-map <silent> <F7> :call ToggleFold()<CR>
+nnoremap <silent> <F7> :call ToggleFold()<CR>
+nnoremap <silent> <F8> :Ack! 
+nnoremap <silent> <C-F8> :cd %:p:h<CR>:Ack! 
+nnoremap <silent> <F9> @@n
+nnoremap <silent> <C-F9> @@N
 let g:EasyMotion_leader_key = '<F12>'
 "cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
@@ -149,7 +154,7 @@ set background=dark
 if has('gui_running')
   colorscheme hickop
 else
-  colorscheme solarized
+  colorscheme hickop
 endif
 "}}}
 
@@ -202,7 +207,14 @@ iabbrev iofs int_of_string
 iabbrev sofi string_of_int
 iabbrev fofs float_of_string
 iabbrev sofs string_of_float
+iabbrev lofe List.of_enum
+iabbrev eofl List.enum
 iabbrev ibp import ipdb; ipdb.set_trace()
+iabbrev gb group_by
+iabbrev yeild yield
+iabbrev yiedl yield
+iabbrev __class __class__
+iabbrev __name __name__
 "}}}
 set tabstop=4
 set shiftwidth=4
@@ -296,3 +308,4 @@ set ofu=syntaxcomplete#Complete
 set nonumber
 autocmd FileType * set nonumber
 set nosol
+set colorcolumn=80
