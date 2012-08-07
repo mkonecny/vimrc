@@ -215,6 +215,7 @@ iabbrev yeild yield
 iabbrev yiedl yield
 iabbrev __class __class__
 iabbrev __name __name__
+iabbrev convinience convenience
 "}}}
 set tabstop=4
 set shiftwidth=4
