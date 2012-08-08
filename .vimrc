@@ -33,6 +33,7 @@ let g:vundle_default_git_proto = 'git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
+Bundle 'joonty/vim-xdebug'
 Bundle 'danro/rename.vim'
 Bundle 'hickop'
 Bundle 'oceandeep'
@@ -43,6 +44,7 @@ Bundle 'FuzzyFinder'
 Bundle 'mirell/vim-matchit'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-repeat'
 Bundle 'majutsushi/tagbar'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
@@ -127,7 +129,10 @@ nnoremap <silent> <F8> :Ack!
 nnoremap <silent> <C-F8> :cd %:p:h<CR>:Ack! 
 nnoremap <silent> <F9> @@n
 nnoremap <silent> <C-F9> @@N
+nnoremap <silent> <F10> :edit!<CR>
+
 let g:EasyMotion_leader_key = '<F12>'
+
 "cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
 "Execute the line under the cursor
