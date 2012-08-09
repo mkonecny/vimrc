@@ -18,6 +18,7 @@ syntax enable
 set noerrorbells novisualbell t_vb=
 "indentation
 "gui
+"We keep the menu on purpose
 set guioptions-=r
 set guioptions-=T
 set guioptions-=l
@@ -33,7 +34,11 @@ let g:vundle_default_git_proto = 'git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
-Bundle 'joonty/vim-xdebug'
+Bundle 'sjl/gundo.vim'
+Bundle 'ehamberg/vim-cute-python'
+Bundle 'mru.vim'
+"clobbers your keys
+"Bundle 'joonty/vim-xdebug'
 Bundle 'danro/rename.vim'
 Bundle 'hickop'
 Bundle 'oceandeep'
@@ -130,8 +135,12 @@ nnoremap <silent> <C-F8> :cd %:p:h<CR>:Ack!
 nnoremap <silent> <F9> @@n
 nnoremap <silent> <C-F9> @@N
 nnoremap <silent> <F10> :edit!<CR>
-
+nnoremap <silent> <F11> :GundoToggle<CR>
 let g:EasyMotion_leader_key = '<F12>'
+nnoremap ,t1 :set tags=~/Airtime/tags<CR>
+nnoremap ,t2 :set tags=~/Airtime/python_apps/tags<CR>
+nnoremap ,t3 :set tags=~/Airtime/python_apps/media-monitor2/tags<CR>
+nnoremap ,t4 :set tags=~/Airtime/airtime_mvc/application/tags<CR>
 
 "cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
@@ -182,6 +191,7 @@ let g:miniBufExplModSelTarget = 1
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
+let g:gundo_right = 1
 "}}}
 "abbreviations"{{{
 iabbrev pust puts
@@ -315,3 +325,4 @@ set nonumber
 autocmd FileType * set nonumber
 set nosol
 set colorcolumn=80
+set formatprg=par
