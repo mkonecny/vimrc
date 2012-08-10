@@ -34,6 +34,15 @@ let g:vundle_default_git_proto = 'git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
+Bundle 'michaeljsmith/vim-indent-object'
+" Keep either this or snipmate
+Bundle 'guns/ultisnips'
+Bundle 'Shougo/vimproc'
+Bundle 'eagletmt/ghcmod-vim'
+Bundle 'ujihisa/neco-ghc'
+"doesn't work unfortunately
+"Bundle 'kana/vim-textobj-indent'
+Bundle 'dag/vim2hs'
 Bundle 'sjl/gundo.vim'
 Bundle 'ehamberg/vim-cute-python'
 Bundle 'mru.vim'
@@ -320,9 +329,12 @@ autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,cc T*ct*
 autocmd FileType python set nonu
 set ofu=syntaxcomplete#Complete
-
+" Some idiotic plugin goes out of it's way to turn on line numberings...
 set nonumber
 autocmd FileType * set nonumber
 set nosol
 set colorcolumn=80
 set formatprg=par
+let g:haskell_conceal_wide = 1
+" in case neco-ghc donesn't work
+let $PATH = $PATH . ':' . expand("~/.cabal/bin")
