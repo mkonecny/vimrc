@@ -7,19 +7,23 @@ set hlsearch
 set ignorecase
 set smartcase
 set ruler
+" not very smart after all...
 "set smartindent
 set mouse=a
-set t_vb=
 set nobackup
+set noswapfile
 set cursorline
 set noautochdir " automatically change the directory to the current working file
 set t_Co=256
 syntax enable
-set noerrorbells novisualbell t_vb=
+set noerrorbells 
+set novisualbell 
+set t_vb=
 "indentation
 "gui
 "We keep the menu on purpose
 set guioptions-=r
+set winaltkeys=no
 set guioptions-=T
 set guioptions-=l
 set go-=R
@@ -34,9 +38,13 @@ let g:vundle_default_git_proto = 'git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
+Bundle 'vim-scripts/Align'
+Bundle 'dbext.vim'
+"set macmeta on macs
+Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
 " Keep either this or snipmate
-Bundle 'guns/ultisnips'
+"Bundle 'guns/ultisnips'
 Bundle 'Shougo/vimproc'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'ujihisa/neco-ghc'
@@ -116,7 +124,7 @@ nnoremap <silent> <C-k>      :FufMruCmd<CR>
 nnoremap <silent> <C-b>      :FufBookmarkDir<CR>
 nnoremap <silent> <C-f><C-t> :FufTag<CR>
 nnoremap <silent> <C-f>t     :FufTag!<CR>
-noremap  <silent> g]         :FufTagWithCursorWord!<CR>
+nnoremap <silent> g]         :FufTagWithCursorWord!<CR>
 nnoremap <silent> <C-f><C-f> :FufTaggedFile<CR>
 nnoremap <silent> <C-f><C-j> :FufJumpList<CR>
 nnoremap <silent> <C-f><C-g> :FufChangeList<CR>
@@ -128,7 +136,6 @@ vnoremap <silent> <C-f><C-b> :FufAddBookmarkAsSelectedText<CR>
 nnoremap <silent> <C-f><C-e> :FufEditInfo<CR>
 nnoremap <silent> <C-f><C-r> :FufRenewCache<CR>
 "}}}
-"{{{ function keys
 nnoremap <silent> <F2> :silent noh<CR>
 nnoremap <silent> <C-F5> :Errors<CR>
 nnoremap <silent> <F3> :BD<CR>
@@ -150,13 +157,12 @@ nnoremap ,t1 :set tags=~/Airtime/tags<CR>
 nnoremap ,t2 :set tags=~/Airtime/python_apps/tags<CR>
 nnoremap ,t3 :set tags=~/Airtime/python_apps/media-monitor2/tags<CR>
 nnoremap ,t4 :set tags=~/Airtime/airtime_mvc/application/tags<CR>
-
 "cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
 "Execute the line under the cursor
 nnoremap ,el yy:! <C-R><C-0><BS><CR>
-nnoremap ,st B"1dt,EbdwbPEl"1pi <ESC>
-"}}}
+nnoremap ,ob :! ocaml setup.ml -all<CR>
+
 "{{{ folding toggle function
 let g:FoldMethod = 1
 fun! ToggleFold()
@@ -236,6 +242,7 @@ iabbrev eofl List.enum
 iabbrev ibp import ipdb; ipdb.set_trace()
 iabbrev gb group_by
 iabbrev yeild yield
+iabbrev bund Bundle
 iabbrev yiedl yield
 iabbrev __class __class__
 iabbrev __name __name__
@@ -338,3 +345,54 @@ set formatprg=par
 let g:haskell_conceal_wide = 1
 " in case neco-ghc donesn't work
 let $PATH = $PATH . ':' . expand("~/.cabal/bin")
+
+
+
+" A whole bunch of stuff to let us open and close lines with going into
+" insert mode
+
+function! AddEmptyLineBelow()
+  call append(line("."), "")
+endfunction
+
+function! AddEmptyLineAbove()
+  let l:scrolloffsave = &scrolloff
+  " Avoid jerky scrolling with ^E at top of window
+  set scrolloff=0
+  call append(line(".") - 1, "")
+  if winline() != winheight(0)
+    silent normal! <C-e>
+  end
+  let &scrolloff = l:scrolloffsave
+endfunction
+
+function! DelEmptyLineBelow()
+  if line(".") == line("$")
+    return
+  end
+  let l:line = getline(line(".") + 1)
+  if l:line =~ '^\s*$'
+    let l:colsave = col(".")
+    .+1d
+    ''
+    call cursor(line("."), l:colsave)
+  end
+endfunction
+
+function! DelEmptyLineAbove()
+  if line(".") == 1
+    return
+  end
+  let l:line = getline(line(".") - 1)
+  if l:line =~ '^\s*$'
+    let l:colsave = col(".")
+    .-1d
+    silent normal! <C-y>
+    call cursor(line("."), l:colsave)
+  end
+endfunction
+
+nnoremap <silent> <A-d> :call DelEmptyLineBelow()<CR>
+nnoremap <silent> <A-D> :call DelEmptyLineAbove()<CR>
+nnoremap <silent> <A-o> :call AddEmptyLineBelow()<CR>
+nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
