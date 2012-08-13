@@ -45,7 +45,7 @@ Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
 " Keep either this or snipmate
 Bundle 'vim-scripts/UltiSnips'
-"Bundle 'SirVer/ultisnips'
+"Bundle 'sirver/ultisnips'
 Bundle 'Shougo/vimproc'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'ujihisa/neco-ghc'
@@ -53,7 +53,7 @@ Bundle 'ujihisa/neco-ghc'
 "Bundle 'kana/vim-textobj-indent'
 Bundle 'dag/vim2hs'
 Bundle 'sjl/gundo.vim'
-Bundle 'ehamberg/vim-cute-python'
+"Bundle 'ehamberg/vim-cute-python'
 Bundle 'mru.vim'
 "clobbers your keys
 "Bundle 'joonty/vim-xdebug'
@@ -167,6 +167,17 @@ nnoremap ,cd :cd %:p:h<CR>
 "Execute the line under the cursor
 nnoremap ,el yy:! <C-R><C-0><BS><CR>
 nnoremap ,ob :! ocaml setup.ml -all<CR>
+nnoremap ,ev :e ~/.vimrc<CR>
+nnoremap ,er :so ~/.vimrc<CR>
+"note the trailing space in the next 2 mappings
+nnoremap ,aa :Ack! 
+nnoremap ,ac :cd %:p:h<CR>:Ack! 
+nnoremap ,q :q!<CR>
+"quick alignment shortcuts for selections
+vnoremap ,a= :Align =<CR>
+vnoremap ,a, :Align ,<CR>
+vnoremap ,a: :Align :<CR>
+vnoremap ,am :Align import<CR>
 
 "{{{ folding toggle function
 let g:FoldMethod = 1
