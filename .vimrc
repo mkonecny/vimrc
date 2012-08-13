@@ -110,7 +110,8 @@ filetype plugin indent on
 let g:fuf_modesDisable = []
 let g:fuf_mrufile_maxItem = 1000
 let g:fuf_mrucmd_maxItem = 400
-let g:fuf_mrufile_exclude = '\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'"}}}
+let g:fuf_mrufile_exclude = '\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
+"}}}
 "Fuzzy find keys"{{{
 nnoremap <silent> <C-n>      :FufBuffer<CR>
 nnoremap <silent> <C-p>      :FufFileWithCurrentBufferDir<CR>
