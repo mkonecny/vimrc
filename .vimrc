@@ -44,7 +44,8 @@ Bundle 'dbext.vim'
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
 " Keep either this or snipmate
-"Bundle 'guns/ultisnips'
+Bundle 'vim-scripts/UltiSnips'
+"Bundle 'SirVer/ultisnips'
 Bundle 'Shougo/vimproc'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'ujihisa/neco-ghc'
@@ -70,9 +71,9 @@ Bundle 'tpope/vim-repeat'
 Bundle 'majutsushi/tagbar'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
-Bundle 'snipmate-snippets'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/snipmate-snippets'
+"Bundle 'snipmate-snippets'
+"Bundle 'garbas/vim-snipmate'
+"Bundle 'honza/snipmate-snippets'
 Bundle 'ervandew/supertab'
 Bundle 'altercation/vim-colors-solarized'
 " perl-support bundle somehow messes up with indentation somehow
@@ -137,6 +138,8 @@ vnoremap <silent> <C-f><C-b> :FufAddBookmarkAsSelectedText<CR>
 nnoremap <silent> <C-f><C-e> :FufEditInfo<CR>
 nnoremap <silent> <C-f><C-r> :FufRenewCache<CR>
 "}}}
+nnoremap <F1> :cnext<CR>
+nnoremap <C-F1> :cprev<CR>
 nnoremap <silent> <F2> :silent noh<CR>
 nnoremap <silent> <C-F5> :Errors<CR>
 nnoremap <silent> <F3> :BD<CR>
@@ -154,6 +157,7 @@ nnoremap <silent> <C-F9> @@N
 nnoremap <silent> <F10> :edit!<CR>
 nnoremap <silent> <F11> :GundoToggle<CR>
 let g:EasyMotion_leader_key = '<F12>'
+"There should be a better of doing this
 nnoremap ,t1 :set tags=~/Airtime/tags<CR>
 nnoremap ,t2 :set tags=~/Airtime/python_apps/tags<CR>
 nnoremap ,t3 :set tags=~/Airtime/python_apps/media-monitor2/tags<CR>
@@ -346,7 +350,7 @@ set formatprg=par
 let g:haskell_conceal_wide = 1
 " in case neco-ghc donesn't work
 let $PATH = $PATH . ':' . expand("~/.cabal/bin")
-
+let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/UltiSnips"]
 
 
 " A whole bunch of stuff to let us open and close lines with going into
