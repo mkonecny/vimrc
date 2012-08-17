@@ -33,12 +33,27 @@ setlocal spell spelllang=en_us
 set spell
 set complete-=i "make completion ignore modules in the file system
 
+set fillchars=vert:│    " that's a vertical box-drawing character
+
+"set statusline=
+"set statusline +=%1*\ %n\ %*            "buffer number
+"set statusline +=%5*%{&ff}%*            "file format
+"set statusline +=%3*%y%*                "file type
+"set statusline +=%4*\ %<%F%*            "full path
+"set statusline +=%2*%m%*                "modified flag
+"set statusline +=%1*%=%5l%*             "current line
+"set statusline +=%2*/%L%*               "total lines
+"set statusline +=%1*%4v\ %*             "virtual column number
+"set statusline +=%2*0x%04B\ %*          "character under cursor
+
 "Vundle stuff"{{{
 let g:vundle_default_git_proto = 'git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/Align'
+Bundle 'vim-scripts/SQLUtilities'
+let g:sqlutil_align_comma = 1
 Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
@@ -173,11 +188,13 @@ nnoremap ,er :so ~/.vimrc<CR>
 nnoremap ,aa :Ack! 
 nnoremap ,ac :cd %:p:h<CR>:Ack! 
 nnoremap ,q :q!<CR>
+nnoremap ,m :bmodified<CR>
 "quick alignment shortcuts for selections
 vnoremap ,a= :Align =<CR>
 vnoremap ,a, :Align ,<CR>
 vnoremap ,a: :Align :<CR>
 vnoremap ,am :Align import<CR>
+cnoremap w!! w !sudo dd of=%
 
 "{{{ folding toggle function
 let g:FoldMethod = 1
@@ -357,7 +374,6 @@ set nonumber
 autocmd FileType * set nonumber
 set nosol
 set colorcolumn=80
-set formatprg=par
 let g:haskell_conceal_wide = 1
 " in case neco-ghc donesn't work
 let $PATH = $PATH . ':' . expand("~/.cabal/bin")
@@ -412,3 +428,4 @@ nnoremap <silent> <A-d> :call DelEmptyLineBelow()<CR>
 nnoremap <silent> <A-D> :call DelEmptyLineAbove()<CR>
 nnoremap <silent> <A-o> :call AddEmptyLineBelow()<CR>
 nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
+vnoremap <silent> ,ql :SQLUFormatter<CR>
