@@ -33,18 +33,10 @@ setlocal spell spelllang=en_us
 set spell
 set complete-=i "make completion ignore modules in the file system
 
-set fillchars=vert:│    " that's a vertical box-drawing character
+"set fillchars=vert:│    " that's a vertical box-drawing character
 
-"set statusline=
-"set statusline +=%1*\ %n\ %*            "buffer number
-"set statusline +=%5*%{&ff}%*            "file format
-"set statusline +=%3*%y%*                "file type
-"set statusline +=%4*\ %<%F%*            "full path
-"set statusline +=%2*%m%*                "modified flag
-"set statusline +=%1*%=%5l%*             "current line
-"set statusline +=%2*/%L%*               "total lines
-"set statusline +=%1*%4v\ %*             "virtual column number
-"set statusline +=%2*0x%04B\ %*          "character under cursor
+"let g:UltiSnipsExpandTrigger="<c-tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-'>"
 
 "Vundle stuff"{{{
 let g:vundle_default_git_proto = 'git'
@@ -76,9 +68,11 @@ Bundle 'danro/rename.vim'
 Bundle 'hickop'
 Bundle 'oceandeep'
 Bundle 'ciaranm/inkpot'
+Bundle 'chrisv/vim-chrisv'
 Bundle 'darktango.vim'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
+Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'mirell/vim-matchit'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
@@ -195,6 +189,9 @@ vnoremap ,a, :Align ,<CR>
 vnoremap ,a: :Align :<CR>
 vnoremap ,am :Align import<CR>
 cnoremap w!! w !sudo dd of=%
+vnoremap <silent> ,ql :SQLUFormatter<CR>
+inoremap jk <esc>
+inoremap <esc> <nop>
 
 "{{{ folding toggle function
 let g:FoldMethod = 1
@@ -380,6 +377,8 @@ let $PATH = $PATH . ':' . expand("~/.cabal/bin")
 let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/UltiSnips"]
 
 
+let g:haddock_browser = "firefox"
+
 " A whole bunch of stuff to let us open and close lines with going into
 " insert mode
 
@@ -428,4 +427,9 @@ nnoremap <silent> <A-d> :call DelEmptyLineBelow()<CR>
 nnoremap <silent> <A-D> :call DelEmptyLineAbove()<CR>
 nnoremap <silent> <A-o> :call AddEmptyLineBelow()<CR>
 nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
-vnoremap <silent> ,ql :SQLUFormatter<CR>
+
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
