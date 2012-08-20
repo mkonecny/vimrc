@@ -427,6 +427,7 @@ nnoremap <silent> <A-d> :call DelEmptyLineBelow()<CR>
 nnoremap <silent> <A-D> :call DelEmptyLineAbove()<CR>
 nnoremap <silent> <A-o> :call AddEmptyLineBelow()<CR>
 nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
+vnoremap <silent> ,ql :SQLUFormatter<CR>
 
 "au VimEnter * RainbowParenthesesToggle
 "au Syntax * RainbowParenthesesLoadRound
