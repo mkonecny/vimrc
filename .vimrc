@@ -72,7 +72,7 @@ Bundle 'chrisv/vim-chrisv'
 Bundle 'darktango.vim'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
-Bundle 'kien/rainbow_parentheses.vim'
+"Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'mirell/vim-matchit'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
@@ -428,8 +428,8 @@ nnoremap <silent> <A-D> :call DelEmptyLineAbove()<CR>
 nnoremap <silent> <A-o> :call AddEmptyLineBelow()<CR>
 nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
 
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+"au VimEnter * RainbowParenthesesToggle
+"au Syntax * RainbowParenthesesLoadRound
+"au Syntax * RainbowParenthesesLoadSquare
+"au Syntax * RainbowParenthesesLoadBraces
 
