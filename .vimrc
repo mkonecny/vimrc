@@ -371,7 +371,7 @@ set nonumber
 autocmd FileType * set nonumber
 set nosol
 set colorcolumn=80
-let g:haskell_conceal_wide = 1
+"let g:haskell_conceal_wide = 1
 " in case neco-ghc donesn't work
 let $PATH = $PATH . ':' . expand("~/.cabal/bin")
 let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/UltiSnips"]
