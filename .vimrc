@@ -46,6 +46,7 @@ Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/Align'
 Bundle 'vim-scripts/SQLUtilities'
 let g:sqlutil_align_comma = 1
+let g:PHP_autoformatcomment = 0
 Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
