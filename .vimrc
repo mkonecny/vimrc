@@ -19,9 +19,6 @@ syntax enable
 set noerrorbells 
 set novisualbell 
 set t_vb=
-"indentation
-"gui
-"We keep the menu on purpose
 set guioptions-=r
 set winaltkeys=no
 set guioptions-=T
@@ -29,11 +26,12 @@ set guioptions-=l
 set go-=R
 set go-=L
 set tags=./tags
-setlocal spell spelllang=en_us
-set spell
+"Spelling intereferes with colorschemes greatly. Hence it must go
+"setlocal spell spelllang=en_us
+"set spell
 set complete-=i "make completion ignore modules in the file system
 
-"set fillchars=vert:│    " that's a vertical box-drawing character
+set fillchars=vert:│    " that's a vertical box-drawing character
 
 "let g:UltiSnipsExpandTrigger="<c-tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-'>"
@@ -45,16 +43,17 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/Align'
 Bundle 'vim-scripts/SQLUtilities'
-let g:sqlutil_align_comma = 1
-let g:PHP_autoformatcomment = 0
+Bundle 'nanotech/jellybeans.vim'
 Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
+"Bundle 'spolu/dwm.vim'
 " Keep either this or snipmate
 Bundle 'vim-scripts/UltiSnips'
 "Bundle 'sirver/ultisnips'
 Bundle 'Shougo/vimproc'
+Bundle 'Shougo/neocomplcache'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'ujihisa/neco-ghc'
 "doesn't work unfortunately
@@ -73,17 +72,21 @@ Bundle 'chrisv/vim-chrisv'
 Bundle 'darktango.vim'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
+"rainbow paren settings are commented out at the bottom
 "Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'mirell/vim-matchit'
+Bundle 'vim-scripts/searchfold.vim'
+Bundle 'vim-scripts/SearchComplete'
+Bundle 'jesstelford/phpfolding.vim'
+"takes too much screen space
+"Bundle 'vim-scripts/ShowMarks'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-unimpaired'
 Bundle 'majutsushi/tagbar'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
-"Bundle 'snipmate-snippets'
-"Bundle 'garbas/vim-snipmate'
-"Bundle 'honza/snipmate-snippets'
 Bundle 'ervandew/supertab'
 Bundle 'altercation/vim-colors-solarized'
 " perl-support bundle somehow messes up with indentation somehow
@@ -93,6 +96,7 @@ Bundle 'rson/vim-conque'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
+"we use vam for the next two plugins
 "Bundle 'MarcWeber/vim-addon-ocaml'
 "Bundle 'jrk/vim-ocaml'
 Bundle 'scrooloose/syntastic'
@@ -108,9 +112,8 @@ Bundle 'vim-scripts/taglist.vim'
 Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
 "Bundle 'torandu/vim-bufexplorer'
+"Doesn't play well with fuzzyfinder swithc buffer
 "Bundle 'fholgado/minibufexpl.vim'
-"Bundle 'vim-scripts/snippetsEmu'
-"Bundle 'vim-scripts/snippetsEmu-bundles'
 Bundle 'pangloss/vim-javascript'
 Bundle 'LStinson/perlhelp-vim'
 Bundle 'skammer/vim-css-color'
@@ -119,9 +122,9 @@ filetype plugin indent on
 
 let NERDTreeIgnore = ['\.pyc$']
 "fuzzy find settings"{{{
-let g:fuf_modesDisable = []
+let g:fuf_modesDisable    = []
 let g:fuf_mrufile_maxItem = 1000
-let g:fuf_mrucmd_maxItem = 400
+let g:fuf_mrucmd_maxItem  = 400
 let g:fuf_mrufile_exclude = '\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
 "}}}
 "Fuzzy find keys"{{{
@@ -194,6 +197,10 @@ cnoremap w!! w !sudo dd of=%
 vnoremap <silent> ,ql :SQLUFormatter<CR>
 inoremap jk <esc>
 inoremap <esc> <nop>
+nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+"need a better key for this
+nnoremap s <C-W>
+autocmd filetype netrw nnoremap <buffer> s <C-W>
 
 "{{{ folding toggle function
 let g:FoldMethod = 1
@@ -213,32 +220,35 @@ endfun
 "color theme settings"{{{
 set background=dark
 if has('gui_running')
-  colorscheme hickop
+  colorscheme jellybeans
 else
   colorscheme hickop
 endif
 "}}}
 
 set guifont=Inconsolata\ Medium\ 11
-let g:syntastic_enable_highlighting=1
-let g:syntastic_enable_signs=1
-let g:slime_target = "tmux"
-let g:ackprg="ack -H --nocolor --nogroup --column"
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_enable_signs        = 1
+let g:slime_target                  = "tmux"
+let g:ackprg                        = "ack -H --nocolor --nogroup --column"
 
 let g:pymode_lint_write = 0
-let g:pymode_run_key = 'R'
+let g:pymode_run_key    = 'R'
 
 "minibufexplr settings"{{{
-let g:miniBufExplMapWindowNavVim = 1 
-let g:miniBufExplMapWindowNavArrows = 1 
-let g:miniBufExplMapCTabSwitchBufs = 1 
-let g:miniBufExplModSelTarget = 1 
+let g:miniBufExplMapWindowNavVim    = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs  = 1
+let g:miniBufExplModSelTarget       = 1
 "}}}
+"random formatting settings
+let g:sqlutil_align_comma   = 1
+let g:PHP_autoformatcomment = 0
 "javascript/html indentation"{{{
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
-let g:gundo_right = 1
+let g:html_indent_style1  = "inc"
+let g:gundo_right         = 1
 "}}}
 "abbreviations"{{{
 iabbrev pust puts
@@ -366,8 +376,7 @@ call vam#ActivateAddons(["vim-addon-ocaml"], {'auto_install' : 1})
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,cc T*ct*
-autocmd FileType python set nonu
-set ofu=syntaxcomplete#Complete
+autocmd FileType python set nonu "python mode insists on turning this on...
 " Some idiotic plugin goes out of it's way to turn on line numberings...
 set nonumber
 autocmd FileType * set nonumber
@@ -377,9 +386,16 @@ set colorcolumn=80
 " in case neco-ghc donesn't work
 let $PATH = $PATH . ':' . expand("~/.cabal/bin")
 let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/UltiSnips"]
-
-
 let g:haddock_browser = "firefox"
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_underbar_completion = 1
+" proper omnicompletion through neocomplete
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " A whole bunch of stuff to let us open and close lines with going into
 " insert mode
@@ -435,4 +451,5 @@ vnoremap <silent> ,ql :SQLUFormatter<CR>
 "au Syntax * RainbowParenthesesLoadRound
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
+
 
