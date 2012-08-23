@@ -200,6 +200,7 @@ inoremap <esc> <nop>
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 "need a better key for this
 nnoremap s <C-W>
+nnoremap <silent> <C-S> s 
 autocmd filetype netrw nnoremap <buffer> s <C-W>
 
 "{{{ folding toggle function
