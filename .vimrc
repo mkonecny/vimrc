@@ -49,7 +49,6 @@ Bundle 'dbext.vim'
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
 "Bundle 'spolu/dwm.vim'
-" Keep either this or snipmate
 Bundle 'vim-scripts/UltiSnips'
 "Bundle 'sirver/ultisnips'
 Bundle 'Shougo/vimproc'
@@ -77,7 +76,9 @@ Bundle 'FuzzyFinder'
 Bundle 'mirell/vim-matchit'
 Bundle 'vim-scripts/searchfold.vim'
 Bundle 'vim-scripts/SearchComplete'
+Bundle 'tony/vim-tail'
 Bundle 'jesstelford/phpfolding.vim'
+"Bundle "spf13/PIV"
 "takes too much screen space
 "Bundle 'vim-scripts/ShowMarks'
 Bundle 'tpope/vim-surround'
@@ -180,11 +181,17 @@ nnoremap ,t4 :set tags=~/Airtime/airtime_mvc/application/tags<CR>
 nnoremap ,cd :cd %:p:h<CR>
 "Execute the line under the cursor
 nnoremap ,el yy:! <C-R><C-0><BS><CR>
+"Set this keymapping only for ocaml mode (and perhaps _oasis files too)
 nnoremap ,ob :! ocaml setup.ml -all<CR>
+"edit vimrc
 nnoremap ,ev :e ~/.vimrc<CR>
+"reload vimrc
 nnoremap ,er :so ~/.vimrc<CR>
 "note the trailing space in the next 2 mappings
 nnoremap ,aa :Ack! 
+"ack word under cursor
+nnoremap ,aw :Ack! <C-R><C-W><CR>
+"cd + ack
 nnoremap ,ac :cd %:p:h<CR>:Ack! 
 nnoremap ,q :q!<CR>
 nnoremap ,m :bmodified<CR>
@@ -192,16 +199,23 @@ nnoremap ,m :bmodified<CR>
 vnoremap ,a= :Align =<CR>
 vnoremap ,a, :Align ,<CR>
 vnoremap ,a: :Align :<CR>
+vnoremap ,a> :Align =><CR>
 vnoremap ,am :Align import<CR>
 cnoremap w!! w !sudo dd of=%
 vnoremap <silent> ,ql :SQLUFormatter<CR>
 inoremap jk <esc>
 inoremap <esc> <nop>
+"open last search in quickfix window
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-"need a better key for this
 nnoremap s <C-W>
 nnoremap <silent> <C-S> s 
 autocmd filetype netrw nnoremap <buffer> s <C-W>
+"dwm vim stuff
+let g:dwm_map_keys = 0
+"nnoremap <silent> ,n :call DWM_New()<CR>
+"nnoremap <silent> ,c :call DWM_Close()<CR>
+"nnoremap <silent> ,h :call DWM_Focus()<CR>
+"nnoremap <silent> ,l :call DWM_Full()<CR>
 
 "{{{ folding toggle function
 let g:FoldMethod = 1
@@ -290,6 +304,8 @@ iabbrev yiedl yield
 iabbrev __class __class__
 iabbrev __name __name__
 iabbrev convinience convenience
+iabbrev psf public static function
+iabbrev logi Logging::info
 "}}}
 set tabstop=4
 set shiftwidth=4
@@ -374,9 +390,12 @@ call SetupVAM()
 call vam#ActivateAddons(["vim-addon-ocaml"], {'auto_install' : 1})
 "}}}
 
+" we have a special folding script for php
+autocmd FileType php setlocal fdm=manual
+
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
-autocmd FileType ocaml nnoremap ,cc T*ct*
+autocmd FileType ocaml nnoremap ,ic T*ct*
 autocmd FileType python set nonu "python mode insists on turning this on...
 " Some idiotic plugin goes out of it's way to turn on line numberings...
 set nonumber
