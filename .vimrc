@@ -304,8 +304,12 @@ iabbrev yiedl yield
 iabbrev __class __class__
 iabbrev __name __name__
 iabbrev convinience convenience
+"fast 'java' style definition
 iabbrev psf public static function
+"php debugging function
 iabbrev logi Logging::info
+iabbrev logw Logging::warn
+iabbrev logd logging::debug
 "}}}
 set tabstop=4
 set shiftwidth=4
