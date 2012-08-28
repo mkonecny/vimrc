@@ -107,6 +107,7 @@ Bundle 'therubymug/vim-pyte'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
 Bundle 'vim-scripts/bufkill.vim'
+Bundle 'vim-scripts/vimwiki'
 Bundle 'jpalardy/vim-slime'
 "Bundle 'xolog/vim-easytags'
 Bundle 'vim-scripts/taglist.vim'
@@ -207,9 +208,6 @@ inoremap jk <esc>
 inoremap <esc> <nop>
 "open last search in quickfix window
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-nnoremap s <C-W>
-nnoremap <silent> <C-S> s 
-autocmd filetype netrw nnoremap <buffer> s <C-W>
 "dwm vim stuff
 let g:dwm_map_keys = 0
 "nnoremap <silent> ,n :call DWM_New()<CR>
@@ -476,4 +474,5 @@ vnoremap <silent> ,ql :SQLUFormatter<CR>
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
 
-
+nnoremap s <C-W>
+nnoremap <silent> <C-S> s 
