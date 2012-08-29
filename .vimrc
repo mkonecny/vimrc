@@ -37,7 +37,7 @@ set fillchars=vert:│    " that's a vertical box-drawing character
 "let g:UltiSnipsJumpForwardTrigger="<c-'>"
 
 "Vundle stuff"{{{
-let g:vundle_default_git_proto = 'git'
+let g:vundle_default_git_proto='git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
@@ -122,12 +122,12 @@ Bundle 'skammer/vim-css-color'
 "}}}
 filetype plugin indent on
 
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore=['\.pyc$']
 "fuzzy find settings"{{{
-let g:fuf_modesDisable    = []
-let g:fuf_mrufile_maxItem = 1000
-let g:fuf_mrucmd_maxItem  = 400
-let g:fuf_mrufile_exclude = '\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
+let g:fuf_modesDisable=[]
+let g:fuf_mrufile_maxItem=1000
+let g:fuf_mrucmd_maxItem=400
+let g:fuf_mrufile_exclude='\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
 "}}}
 "Fuzzy find keys"{{{
 nnoremap <silent> <C-n>      :FufBuffer<CR>
@@ -172,7 +172,7 @@ nnoremap <silent> <F9> @@n
 nnoremap <silent> <C-F9> @@N
 nnoremap <silent> <F10> :edit!<CR>
 nnoremap <silent> <F11> :GundoToggle<CR>
-let g:EasyMotion_leader_key = '<F12>'
+let g:EasyMotion_leader_key='<F12>'
 "There should be a better of doing this
 nnoremap ,t1 :set tags=~/Airtime/tags<CR>
 nnoremap ,t2 :set tags=~/Airtime/python_apps/tags<CR>
@@ -208,23 +208,28 @@ inoremap jk <esc>
 inoremap <esc> <nop>
 "open last search in quickfix window
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+nnoremap ,, :cd ..<CR>
+nnoremap ,pw :pwd <CR>
+nnoremap ,c1 :cd ~/Airtime/<CR>
+nnoremap ,c2 :cd ~/Airtime/python_apps/media-monitor2<CR>
+nnoremap ,c3 :cd ~/Airtime/python_apps/<CR>
 "dwm vim stuff
-let g:dwm_map_keys = 0
+let g:dwm_map_keys=0
 "nnoremap <silent> ,n :call DWM_New()<CR>
 "nnoremap <silent> ,c :call DWM_Close()<CR>
 "nnoremap <silent> ,h :call DWM_Focus()<CR>
 "nnoremap <silent> ,l :call DWM_Full()<CR>
 
 "{{{ folding toggle function
-let g:FoldMethod = 1
+let g:FoldMethod=1
 fun! ToggleFold()
     if g:FoldMethod == 0
         exe 'set foldmethod=indent'
-        let g:FoldMethod = 1
+        let g:FoldMethod=1
         echo 'indent'
     else
         exe 'set foldmethod=marker'
-        let g:FoldMethod = 0
+        let g:FoldMethod=0
         echo 'marker'
     endif
 endfun
@@ -240,28 +245,28 @@ endif
 "}}}
 
 set guifont=Inconsolata\ Medium\ 11
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_enable_signs        = 1
-let g:slime_target                  = "tmux"
-let g:ackprg                        = "ack -H --nocolor --nogroup --column"
+let g:syntastic_enable_highlighting=1
+let g:syntastic_enable_signs=1
+let g:slime_target="tmux"
+let g:ackprg="ack -H --nocolor --nogroup --column"
 
-let g:pymode_lint_write = 0
-let g:pymode_run_key    = 'R'
+let g:pymode_lint_write=0
+let g:pymode_run_key='R'
 
 "minibufexplr settings"{{{
-let g:miniBufExplMapWindowNavVim    = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs  = 1
-let g:miniBufExplModSelTarget       = 1
+let g:miniBufExplMapWindowNavVim=1
+let g:miniBufExplMapWindowNavArrows=1
+let g:miniBufExplMapCTabSwitchBufs=1
+let g:miniBufExplModSelTarget=1
 "}}}
 "random formatting settings
-let g:sqlutil_align_comma   = 1
-let g:PHP_autoformatcomment = 0
+let g:sqlutil_align_comma=1
+let g:PHP_autoformatcomment=0
 "javascript/html indentation"{{{
-let g:html_indent_inctags = "html,body,head,tbody"
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1  = "inc"
-let g:gundo_right         = 1
+let g:html_indent_inctags="html,body,head,tbody"
+let g:html_indent_script1="inc"
+let g:html_indent_style1="inc"
+let g:gundo_right=1
 "}}}
 "abbreviations"{{{
 iabbrev pust puts
@@ -287,7 +292,7 @@ iabbrev dependacies dependencies
 iabbrev dependancies dependencies
 iabbrev pfpf Printf.printf
 iabbrev let_ let _ =
-iabbrev letu let () = 
+iabbrev letu let () =
 iabbrev iofs int_of_string
 iabbrev sofi string_of_int
 iabbrev fofs float_of_string
@@ -323,7 +328,7 @@ fun! EnsureVamIsOnDisk(vam_install_path)
   " to fetch VAM, VAM-known-repositories and the listed plugins
   " without having to install curl, 7-zip and git tools first
   " -> BUG [4] (git-less installation)
-  let is_installed_c = "isdirectory(a:vam_install_path.'/vim-addon-manager/autoload')"
+  let is_installed_c="isdirectory(a:vam_install_path.'/vim-addon-manager/autoload')"
   if eval(is_installed_c)
     return 1
   else
@@ -346,15 +351,15 @@ endf
 
 fun! SetupVAM()
   " Set advanced options like this:
-  " let g:vim_addon_manager = {}
-  " let g:vim_addon_manager['key'] = value
+  " let g:vim_addon_manager={}
+  " let g:vim_addon_manager['key']=value
 
   " Example: drop git sources unless git is in PATH. Same plugins can
   " be installed from www.vim.org. Lookup MergeSources to get more control
-  " let g:vim_addon_manager['drop_git_sources'] = !executable('git')
+  " let g:vim_addon_manager['drop_git_sources']=!executable('git')
 
   " VAM install location:
-  let vam_install_path = expand('$HOME') . '/.vim/vim-addons'
+  let vam_install_path=expand('$HOME') . '/.vim/vim-addons'
   if !EnsureVamIsOnDisk(vam_install_path)
     echohl ErrorMsg
     echomsg "No VAM found!"
@@ -404,14 +409,14 @@ set nonumber
 autocmd FileType * set nonumber
 set nosol
 set colorcolumn=80
-"let g:haskell_conceal_wide = 1
+"let g:haskell_conceal_wide=1
 " in case neco-ghc donesn't work
-let $PATH = $PATH . ':' . expand("~/.cabal/bin")
+let $PATH=$PATH . ':' . expand("~/.cabal/bin")
 let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/UltiSnips"]
-let g:haddock_browser = "firefox"
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_underbar_completion = 1
+let g:haddock_browser="firefox"
+let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_enable_smart_case=1
+let g:neocomplcache_enable_underbar_completion=1
 " proper omnicompletion through neocomplete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -427,23 +432,23 @@ function! AddEmptyLineBelow()
 endfunction
 
 function! AddEmptyLineAbove()
-  let l:scrolloffsave = &scrolloff
+  let l:scrolloffsave=&scrolloff
   " Avoid jerky scrolling with ^E at top of window
   set scrolloff=0
   call append(line(".") - 1, "")
   if winline() != winheight(0)
     silent normal! <C-e>
   end
-  let &scrolloff = l:scrolloffsave
+  let &scrolloff=l:scrolloffsave
 endfunction
 
 function! DelEmptyLineBelow()
   if line(".") == line("$")
     return
   end
-  let l:line = getline(line(".") + 1)
+  let l:line=getline(line(".") + 1)
   if l:line =~ '^\s*$'
-    let l:colsave = col(".")
+    let l:colsave=col(".")
     .+1d
     ''
     call cursor(line("."), l:colsave)
@@ -454,9 +459,9 @@ function! DelEmptyLineAbove()
   if line(".") == 1
     return
   end
-  let l:line = getline(line(".") - 1)
+  let l:line=getline(line(".") - 1)
   if l:line =~ '^\s*$'
-    let l:colsave = col(".")
+    let l:colsave=col(".")
     .-1d
     silent normal! <C-y>
     call cursor(line("."), l:colsave)
