@@ -205,7 +205,7 @@ vnoremap ,am :Align import<CR>
 cnoremap w!! w !sudo dd of=%
 vnoremap <silent> ,ql :SQLUFormatter<CR>
 inoremap jk <esc>
-inoremap <esc> <nop>
+"inoremap <esc> <nop>
 "open last search in quickfix window
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 nnoremap ,, :cd ..<CR>
