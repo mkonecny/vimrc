@@ -203,7 +203,6 @@ vnoremap ,a: :Align :<CR>
 vnoremap ,a> :Align =><CR>
 vnoremap ,am :Align import<CR>
 cnoremap w!! w !sudo dd of=%
-vnoremap <silent> ,ql :SQLUFormatter<CR>
 inoremap jk <esc>
 "inoremap <esc> <nop>
 "open last search in quickfix window
@@ -213,6 +212,7 @@ nnoremap ,pw :pwd <CR>
 nnoremap ,c1 :cd ~/Airtime/<CR>
 nnoremap ,c2 :cd ~/Airtime/python_apps/media-monitor2<CR>
 nnoremap ,c3 :cd ~/Airtime/python_apps/<CR>
+vnoremap <silent> ,ql :! sqlasaservice.py<CR>
 "dwm vim stuff
 let g:dwm_map_keys=0
 "nnoremap <silent> ,n :call DWM_New()<CR>
@@ -472,7 +472,6 @@ nnoremap <silent> <A-d> :call DelEmptyLineBelow()<CR>
 nnoremap <silent> <A-D> :call DelEmptyLineAbove()<CR>
 nnoremap <silent> <A-o> :call AddEmptyLineBelow()<CR>
 nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
-vnoremap <silent> ,ql :SQLUFormatter<CR>
 
 "au VimEnter * RainbowParenthesesToggle
 "au Syntax * RainbowParenthesesLoadRound
