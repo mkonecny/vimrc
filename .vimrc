@@ -248,6 +248,7 @@ set guifont=Inconsolata\ Medium\ 11
 let g:syntastic_enable_highlighting=1
 let g:syntastic_enable_signs=1
 let g:slime_target="tmux"
+let g:slime_python_ipython=1
 let g:ackprg="ack -H --nocolor --nogroup --column"
 
 let g:pymode_lint_write=0
