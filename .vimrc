@@ -480,4 +480,3 @@ nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
 "au Syntax * RainbowParenthesesLoadBraces
 
 nnoremap s <C-W>
-nnoremap <silent> <C-S> s 
