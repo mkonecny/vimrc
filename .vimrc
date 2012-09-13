@@ -166,8 +166,8 @@ onoremap <F5> <C-C>za
 vnoremap <F5> zf
 nnoremap <silent> <F6> :TagbarToggle<CR>
 nnoremap <silent> <F7> :call ToggleFold()<CR>
-nnoremap <silent> <F8> :Ack! 
-nnoremap <silent> <C-F8> :cd %:p:h<CR>:Ack! 
+nnoremap <F8> :Git pull<CR>
+nnoremap <C-F8> :Git push<CR>  
 nnoremap <silent> <F9> @@n
 nnoremap <silent> <C-F9> @@N
 nnoremap <silent> <F10> :edit!<CR>
@@ -213,6 +213,8 @@ nnoremap ,c1 :cd ~/Airtime/<CR>
 nnoremap ,c2 :cd ~/Airtime/python_apps/media-monitor2<CR>
 nnoremap ,c3 :cd ~/Airtime/python_apps/<CR>
 vnoremap <silent> ,ql :! sqlasaservice.py<CR>
+
+
 "dwm vim stuff
 let g:dwm_map_keys=0
 "nnoremap <silent> ,n :call DWM_New()<CR>
