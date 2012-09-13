@@ -325,6 +325,7 @@ set nowrap
 set wrapmargin=0
 set textwidth=0
 set foldmethod=indent
+set formatprg=par
 "{{{ VAM
 fun! EnsureVamIsOnDisk(vam_install_path)
   " windows users may want to use http://mawercer.de/~marc/vam/index.php
