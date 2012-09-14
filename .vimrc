@@ -104,6 +104,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'therubymug/vim-pyte'
+Bundle 'jnurmine/Zenburn'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
 Bundle 'vim-scripts/bufkill.vim'
@@ -240,7 +241,7 @@ endfun
 "color theme settings"{{{
 set background=dark
 if has('gui_running')
-  colorscheme jellybeans
+  colorscheme zenburn
 else
   colorscheme hickop
 endif
