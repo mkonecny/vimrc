@@ -44,6 +44,7 @@ Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/Align'
 Bundle 'vim-scripts/SQLUtilities'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
