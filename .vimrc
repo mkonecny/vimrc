@@ -66,6 +66,7 @@ Bundle 'mru.vim'
 Bundle 'danro/rename.vim'
 Bundle 'hickop'
 Bundle 'oceandeep'
+Bundle 'kana/vim-textobj-user'
 Bundle 'ciaranm/inkpot'
 Bundle 'chrisv/vim-chrisv'
 Bundle 'darktango.vim'
@@ -73,11 +74,13 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 "rainbow paren settings are commented out at the bottom
 "Bundle 'kien/rainbow_parentheses.vim'
-Bundle 'mirell/vim-matchit'
+"included in distro nowadays
+"Bundle 'mirell/vim-matchit'
 Bundle 'vim-scripts/searchfold.vim'
 Bundle 'vim-scripts/SearchComplete'
 Bundle 'tony/vim-tail'
 Bundle 'jesstelford/phpfolding.vim'
+"has annoying bugs
 "Bundle "spf13/PIV"
 "takes too much screen space
 "Bundle 'vim-scripts/ShowMarks'
@@ -91,7 +94,8 @@ Bundle 'tomtom/tlib_vim'
 Bundle 'ervandew/supertab'
 Bundle 'altercation/vim-colors-solarized'
 " perl-support bundle somehow messes up with indentation somehow
-Bundle 'vim-scripts/perl-support.vim'
+" also messes up ctrl-j
+"Bundle 'vim-scripts/perl-support.vim'
 Bundle 'klen/python-mode'
 Bundle 'rson/vim-conque'
 Bundle 'kchmck/vim-coffee-script'
