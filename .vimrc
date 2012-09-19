@@ -515,3 +515,22 @@ nnoremap - <C-W>-
 nnoremap + <C-W>+
 nnoremap <M-<> <C-W><
 nnoremap <M->> <C-W>>
+
+" navigate windows with alt keys
+nnoremap <silent> <M-1> :1wincmd w<CR>
+nnoremap <silent> <M-2> :2wincmd w<CR>
+nnoremap <silent> <M-3> :3wincmd w<CR>
+nnoremap <silent> <M-4> :4wincmd w<CR>
+nnoremap <silent> <M-5> :5wincmd w<CR>
+nnoremap <silent> <M-6> :6wincmd w<CR>
+nnoremap <silent> <M-7> :7wincmd w<CR>
+nnoremap <silent> <M-8> :8wincmd w<CR>
+nnoremap <silent> <M-9> :9wincmd w<CR>
+
+set statusline=
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y
+set statusline+=%#error#
+set statusline+=[[%{winnr()}]] "show current window
+set statusline+=%#todo#%-{fugitive#statusline()}%*
+set statusline+=%=%c,%l/%L\ %P
+
