@@ -44,6 +44,8 @@ Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/Align'
 Bundle 'vim-scripts/SQLUtilities'
 Bundle 'nanotech/jellybeans.vim'
+" <C-W>o to zoom/unzoom
+Bundle 'vim-scripts/ZoomWin'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'dbext.vim'
 "set macmeta on macs
@@ -197,7 +199,7 @@ nnoremap ,er :so ~/.vimrc<CR>
 "note the trailing space in the next 2 mappings
 nnoremap ,aa :Ack! 
 "ack word under cursor
-nnoremap ,aw :Ack! <C-R><C-W><CR>
+nnoremap ,aw :Ack! -w <C-R><C-W><CR>
 "cd + ack
 nnoremap ,ac :cd %:p:h<CR>:Ack! 
 nnoremap ,q :q!<CR>
@@ -252,7 +254,17 @@ else
 endif
 "}}}
 
-set guifont=Inconsolata\ Medium\ 11
+function! IsLaptop()
+    return system('hostname -s') =~ 'rudi-UX31A'
+endfunction
+
+" bigger font for laptop screen
+if IsLaptop()
+    set guifont=Inconsolata\ Medium\ 13
+else
+    set guifont=Inconsolata\ Medium\ 11
+endif
+
 let g:syntastic_enable_highlighting=1
 let g:syntastic_enable_signs=1
 let g:slime_target="tmux"
@@ -478,6 +490,14 @@ function! DelEmptyLineAbove()
   end
 endfunction
 
+
+" for pesky machines (Should be probably be in .xinit or at least bashrc
+" but i'm too to keep those portable)
+function! SetCapsToCtrl()
+    call system('setxkbmap -option ctrl:nocaps')
+endfunction
+call SetCapsToCtrl()
+
 nnoremap <silent> <A-d> :call DelEmptyLineBelow()<CR>
 nnoremap <silent> <A-D> :call DelEmptyLineAbove()<CR>
 nnoremap <silent> <A-o> :call AddEmptyLineBelow()<CR>
@@ -488,4 +508,12 @@ nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
 
+" for some reason the following keybindings is always overwritten.
+" so you must reload your vimrc it to take effect. this is very
+" for annoying. TODO: find a way to fix this
+
 nnoremap s <C-W>
+nnoremap - <C-W>-
+nnoremap + <C-W>+
+nnoremap <M-<> <C-W><
+nnoremap <M->> <C-W>>
