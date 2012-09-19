@@ -511,6 +511,7 @@ nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
 nnoremap s <C-W>
 let NERDTreeMapOpenVSplit='\s'
 au vimenter * map s <C-W>
+au vimenter * :so ~/.vimrc
 nnoremap - <C-W>-
 nnoremap + <C-W>+
 nnoremap <M-<> <C-W><
