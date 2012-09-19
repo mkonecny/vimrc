@@ -508,11 +508,9 @@ nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
 
-" for some reason the following keybindings is always overwritten.
-" so you must reload your vimrc it to take effect. this is very
-" for annoying. TODO: find a way to fix this
-
 nnoremap s <C-W>
+let NERDTreeMapOpenVSplit='\s'
+au vimenter * map s <C-W>
 nnoremap - <C-W>-
 nnoremap + <C-W>+
 nnoremap <M-<> <C-W><
