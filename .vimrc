@@ -116,7 +116,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'vim-scripts/vimwiki'
-Bundle 'jpalardy/vim-slime'
+"Bundle 'jpalardy/vim-slime'
+Bundle 'rgrinberg/vim-slime'
 "Bundle 'xolog/vim-easytags'
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'lukerandall/haskellmode-vim'
@@ -260,7 +261,7 @@ endfunction
 
 " bigger font for laptop screen
 if IsLaptop()
-    set guifont=Inconsolata\ Medium\ 13
+    set guifont=Inconsolata\ Medium\ 14
 else
     set guifont=Inconsolata\ Medium\ 11
 endif
@@ -425,6 +426,10 @@ autocmd FileType php setlocal fdm=manual
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,ic T*ct*
+
+let g:syntastic_ocaml_use_janestreet_core=1
+let g:syntastic_ocaml_janestreet_core_dir="~/.opam/4.00.0/lib/core/"
+
 autocmd FileType python set nonu "python mode insists on turning this on...
 " Some idiotic plugin goes out of it's way to turn on line numberings...
 set nonumber
