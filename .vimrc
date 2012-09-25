@@ -205,6 +205,7 @@ nnoremap ,aw :Ack! -w <C-R><C-W><CR>
 nnoremap ,ac :cd %:p:h<CR>:Ack! 
 nnoremap ,q :q!<CR>
 nnoremap ,m :bmodified<CR>
+nnoremap ,cc :pclose<CR>
 "quick alignment shortcuts for selections
 vnoremap ,a= :Align =<CR>
 vnoremap ,a, :Align ,<CR>
