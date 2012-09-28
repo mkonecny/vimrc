@@ -43,6 +43,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/Align'
 Bundle 'vim-scripts/SQLUtilities'
+Bundle 'ivanov/vim-ipython'
 Bundle 'nanotech/jellybeans.vim'
 " <C-W>o to zoom/unzoom
 Bundle 'vim-scripts/ZoomWin'
