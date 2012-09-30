@@ -419,7 +419,7 @@ call SetupVAM()
 " See BUGS sections below [*]
 " Vim 7.0 users see BUGS section [3]
 " Uncomment the next line to use vim-addon-manager
-call vam#ActivateAddons(["vim-addon-ocaml"], {'auto_install' : 1})
+"call vam#ActivateAddons(["vim-addon-ocaml"], {'auto_install' : 1})
 "}}}
 
 " we have a special folding script for php
@@ -429,6 +429,7 @@ autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,ic T*ct*
 
+let g:ocaml_folding=1
 let g:syntastic_ocaml_use_janestreet_core=1
 let g:syntastic_ocaml_janestreet_core_dir="~/.opam/4.00.0/lib/core/"
 
