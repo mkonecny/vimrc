@@ -82,7 +82,6 @@ Bundle 'FuzzyFinder'
 "Bundle 'mirell/vim-matchit'
 Bundle 'vim-scripts/searchfold.vim'
 Bundle 'vim-scripts/SearchComplete'
-Bundle 'tony/vim-tail'
 Bundle 'jesstelford/phpfolding.vim'
 "has annoying bugs
 "Bundle "spf13/PIV"
