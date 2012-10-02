@@ -354,7 +354,7 @@ autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,ic T*ct*
 
-let g:ocaml_folding=1
+"let g:ocaml_folding=1
 let g:syntastic_ocaml_use_janestreet_core=1
 let g:syntastic_ocaml_janestreet_core_dir="~/.opam/4.00.0/lib/core/"
 
