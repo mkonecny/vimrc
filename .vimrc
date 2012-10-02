@@ -166,13 +166,8 @@ nnoremap <silent> <C-f><C-r> :FufRenewCache<CR>
 nnoremap <F1> :cnext<CR>
 nnoremap <C-F1> :cprev<CR>
 nnoremap <silent> <F2> :silent noh<CR>
-nnoremap <silent> <C-F5> :Errors<CR>
 nnoremap <silent> <F3> :BD<CR>
 nnoremap <silent> <C-F4> :NERDTree<CR>
-inoremap <F5> <C-O>za
-nnoremap <F5> za
-onoremap <F5> <C-C>za
-vnoremap <F5> zf
 nnoremap <silent> <F6> :TagbarToggle<CR>
 nnoremap <silent> <F7> :call ToggleFold()<CR>
 nnoremap <F8> :Git pull<CR>
@@ -223,6 +218,7 @@ nnoremap ,c1 :cd ~/Airtime/<CR>
 nnoremap ,c2 :cd ~/Airtime/python_apps/media-monitor2<CR>
 nnoremap ,c3 :cd ~/Airtime/python_apps/<CR>
 vnoremap <silent> ,ql :! sqlasaservice.py<CR>
+nnoremap <silent> ,[[ V20<<<ESC>
 
 
 "dwm vim stuff
