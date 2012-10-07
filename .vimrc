@@ -246,7 +246,7 @@ endfun
 "color theme settings"{{{
 set background=dark
 if has('gui_running')
-  colorscheme zenburn
+  colorscheme hickop
 else
   colorscheme hickop
 endif
