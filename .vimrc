@@ -41,6 +41,7 @@ let g:vundle_default_git_proto='git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
+Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/Align'
 Bundle 'vim-scripts/SQLUtilities'
 Bundle 'ivanov/vim-ipython'
@@ -464,3 +465,5 @@ set statusline+=[[%{winnr()}]] "show current window
 set statusline+=%#todo#%-{fugitive#statusline()}%*
 set statusline+=%=%c,%l/%L\ %P
 
+au BufRead,BufNewFile *.sc set filetype=scala
+au BufRead,BufNewFile *.scala set filetype=scala
