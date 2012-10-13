@@ -53,7 +53,6 @@ Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
-"Bundle 'spolu/dwm.vim'
 Bundle 'vim-scripts/UltiSnips'
 "Bundle 'sirver/ultisnips'
 Bundle 'Shougo/vimproc'
@@ -221,14 +220,6 @@ nnoremap ,c3 :cd ~/Airtime/python_apps/<CR>
 vnoremap <silent> ,ql :! sqlasaservice.py<CR>
 nnoremap <silent> ,[[ V20<<<ESC>
 nnoremap <silent> ,cap :call SetCapsToCtrl()<CR>
-
-
-"dwm vim stuff
-let g:dwm_map_keys=0
-"nnoremap <silent> ,n :call DWM_New()<CR>
-"nnoremap <silent> ,c :call DWM_Close()<CR>
-"nnoremap <silent> ,h :call DWM_Focus()<CR>
-"nnoremap <silent> ,l :call DWM_Full()<CR>
 
 "{{{ folding toggle function
 let g:FoldMethod=1
