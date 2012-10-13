@@ -220,6 +220,7 @@ nnoremap ,c2 :cd ~/Airtime/python_apps/media-monitor2<CR>
 nnoremap ,c3 :cd ~/Airtime/python_apps/<CR>
 vnoremap <silent> ,ql :! sqlasaservice.py<CR>
 nnoremap <silent> ,[[ V20<<<ESC>
+nnoremap <silent> ,cap :call SetCapsToCtrl()<CR>
 
 
 "dwm vim stuff
