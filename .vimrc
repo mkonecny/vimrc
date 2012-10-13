@@ -131,7 +131,7 @@ Bundle 'skammer/vim-css-color'
 "}}}
 filetype plugin indent on
 
-let NERDTreeIgnore=['\.pyc$']
+let NERDTreeIgnore=['\.pyc$','\.cm[iox]a?$','\.o$']
 "fuzzy find settings"{{{
 let g:fuf_modesDisable=[]
 let g:fuf_mrufile_maxItem=1000
