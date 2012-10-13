@@ -467,3 +467,5 @@ set statusline+=%=%c,%l/%L\ %P
 
 au BufRead,BufNewFile *.sc set filetype=scala
 au BufRead,BufNewFile *.scala set filetype=scala
+
+au BufEnter * :call SetCapsToCtrl()
