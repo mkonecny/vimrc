@@ -12,6 +12,7 @@ set ruler
 set mouse=a
 set nobackup
 set noswapfile
+set virtualedit=all
 set cursorline
 set noautochdir " automatically change the directory to the current working file
 set t_Co=256
@@ -41,7 +42,6 @@ let g:vundle_default_git_proto='git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
-Bundle 'derekwyatt/vim-scala'
 Bundle 'vim-scripts/Align'
 Bundle 'vim-scripts/SQLUtilities'
 Bundle 'ivanov/vim-ipython'
@@ -49,7 +49,7 @@ Bundle 'nanotech/jellybeans.vim'
 " <C-W>o to zoom/unzoom
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'dbext.vim'
+"Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
@@ -120,18 +120,18 @@ Bundle 'vim-scripts/vimwiki'
 Bundle 'rgrinberg/vim-slime'
 "Bundle 'xolog/vim-easytags'
 Bundle 'vim-scripts/taglist.vim'
-Bundle 'lukerandall/haskellmode-vim'
+"Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
 "Bundle 'torandu/vim-bufexplorer'
 "Doesn't play well with fuzzyfinder swithc buffer
 "Bundle 'fholgado/minibufexpl.vim'
 Bundle 'pangloss/vim-javascript'
-Bundle 'LStinson/perlhelp-vim'
+"Bundle 'LStinson/perlhelp-vim'
 Bundle 'skammer/vim-css-color'
 "}}}
 filetype plugin indent on
 
-let NERDTreeIgnore=['\.pyc$','\.cm[iox]a?$','\.o$']
+let NERDTreeIgnore=['\.pyc$','\.o$','\.cmi$','\.cmx$','\.cmo$']
 "fuzzy find settings"{{{
 let g:fuf_modesDisable=[]
 let g:fuf_mrufile_maxItem=1000
@@ -358,7 +358,7 @@ set colorcolumn=80
 let $PATH=$PATH . ':' . expand("~/.cabal/bin")
 let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/UltiSnips"]
 let g:haddock_browser="firefox"
-let g:neocomplcache_enable_at_startup=1
+"let g:neocomplcache_enable_at_startup=1
 let g:neocomplcache_enable_smart_case=1
 let g:neocomplcache_enable_underbar_completion=1
 " proper omnicompletion through neocomplete
@@ -412,6 +412,8 @@ function! DelEmptyLineAbove()
   end
 endfunction
 
+nnoremap  <silent> <leader>. :call Ocaml_print_type("normal")<CR>
+vnoremap <silent> <LocalLeader>. :<C-U>call Ocaml_print_type("visual")<CR>`<
 
 " for pesky machines (Should be probably be in .xinit or at least bashrc
 " but i'm too to keep those portable)
@@ -460,4 +462,3 @@ set statusline+=%=%c,%l/%L\ %P
 au BufRead,BufNewFile *.sc set filetype=scala
 au BufRead,BufNewFile *.scala set filetype=scala
 
-au BufEnter * :call SetCapsToCtrl()
