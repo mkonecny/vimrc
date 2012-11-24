@@ -53,8 +53,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'vim-scripts/UltiSnips'
-"Bundle 'sirver/ultisnips'
+Bundle 'SirVer/ultisnips'
 Bundle 'Shougo/vimproc'
 Bundle 'Shougo/neocomplcache'
 Bundle 'eagletmt/ghcmod-vim'
@@ -76,6 +75,7 @@ Bundle 'chrisv/vim-chrisv'
 Bundle 'darktango.vim'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
+Bundle 'Lokaltog/vim-powerline'
 "rainbow paren settings are commented out at the bottom
 "Bundle 'kien/rainbow_parentheses.vim'
 "included in distro nowadays
@@ -92,14 +92,14 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'majutsushi/tagbar'
-Bundle 'MarcWeber/vim-addon-mw-utils'
+"Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'ervandew/supertab'
 Bundle 'altercation/vim-colors-solarized'
 " perl-support bundle somehow messes up with indentation somehow
 " also messes up ctrl-j
 "Bundle 'vim-scripts/perl-support.vim'
-Bundle 'klen/python-mode'
+"Bundle 'klen/python-mode'
 Bundle 'rson/vim-conque'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
@@ -117,7 +117,6 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'vim-scripts/vimwiki'
-"Bundle 'jpalardy/vim-slime'
 Bundle 'rgrinberg/vim-slime'
 "Bundle 'xolog/vim-easytags'
 Bundle 'vim-scripts/taglist.vim'
@@ -129,6 +128,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'pangloss/vim-javascript'
 "Bundle 'LStinson/perlhelp-vim'
 Bundle 'skammer/vim-css-color'
+Bundle 'kien/ctrlp.vim'
 "}}}
 filetype plugin indent on
 
@@ -140,14 +140,15 @@ let g:fuf_mrucmd_maxItem=400
 let g:fuf_mrufile_exclude='\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
 "}}}
 "Fuzzy find keys"{{{
-nnoremap <silent> <C-n>      :FufBuffer<CR>
-nnoremap <silent> <C-p>      :FufFileWithCurrentBufferDir<CR>
+nnoremap <silent> <C-n>      :CtrlPBuffer<CR>
+" we don't want this anymore becasue we are using ctrlp for that
+"nnoremap <silent> <C-p>      :FufFileWithCurrentBufferDir<CR>
 nnoremap <silent> <C-f><C-p> :FufFileWithFullCwd<CR>
 nnoremap <silent> <C-f>p     :FufFile<CR>
 nnoremap <silent> <C-f><C-d> :FufDirWithCurrentBufferDir<CR>
 nnoremap <silent> <C-f>d     :FufDirWithFullCwd<CR>
 nnoremap <silent> <C-f>D     :FufDir<CR>
-nnoremap <silent> <C-j>      :FufMruFile<CR>
+nnoremap <silent> <C-j>      :CtrlPMRU<CR>
 nnoremap <silent> <C-k>      :FufMruCmd<CR>
 nnoremap <silent> <C-b>      :FufBookmarkDir<CR>
 nnoremap <silent> <C-f><C-t> :FufTag<CR>
@@ -179,16 +180,17 @@ nnoremap <silent> <F10> :edit!<CR>
 nnoremap <silent> <F11> :GundoToggle<CR>
 let g:EasyMotion_leader_key='<F12>'
 "There should be a better of doing this
-nnoremap ,t1 :set tags=~/Airtime/tags<CR>
-nnoremap ,t2 :set tags=~/Airtime/python_apps/tags<CR>
-nnoremap ,t3 :set tags=~/Airtime/python_apps/media-monitor2/tags<CR>
-nnoremap ,t4 :set tags=~/Airtime/airtime_mvc/application/tags<CR>
+nnoremap ,t1 :set tags=~/reps/Airtime/tags<CR>
+nnoremap ,t2 :set tags=~/reps/Airtime/python_apps/tags<CR>
+nnoremap ,t3 :set tags=~/reps/Airtime/python_apps/media-monitor2/tags<CR>
+nnoremap ,t4 :set tags=~/reps/Airtime/airtime_mvc/application/tags<CR>
 "cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
 "Execute the line under the cursor
 nnoremap ,el yy:! <C-R><C-0><BS><CR>
 "Set this keymapping only for ocaml mode (and perhaps _oasis files too)
 nnoremap ,ob :! ocaml setup.ml -all<CR>
+nnoremap ,o4 :! camlp4of % -printer o<CR>
 "edit vimrc
 nnoremap ,ev :e ~/.vimrc<CR>
 "reload vimrc
@@ -214,13 +216,14 @@ inoremap jk <esc>
 "open last search in quickfix window
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 nnoremap ,, :cd ..<CR>
-nnoremap ,pw :pwd <CR>
+nnoremap ,pw :pwd <CR>                                            G
 nnoremap ,c1 :cd ~/Airtime/<CR>
 nnoremap ,c2 :cd ~/Airtime/python_apps/media-monitor2<CR>
 nnoremap ,c3 :cd ~/Airtime/python_apps/<CR>
 vnoremap <silent> ,ql :! sqlasaservice.py<CR>
 nnoremap <silent> ,[[ V20<<<ESC>
 nnoremap <silent> ,cap :call SetCapsToCtrl()<CR>
+nnoremap <silent> ,re :w<CR>:Git checkout %<CR>
 
 "{{{ folding toggle function
 let g:FoldMethod=1
@@ -240,9 +243,9 @@ endfun
 "color theme settings"{{{
 set background=dark
 if has('gui_running')
-  colorscheme hickop
+  colorscheme jellybeans
 else
-  colorscheme hickop
+  colorscheme jellybeans
 endif
 "}}}
 
@@ -367,6 +370,8 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python UltiSnipsAddFiletypes python
+autocmd FileType ocaml UltiSnipsAddFiletypes ocaml
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " A whole bunch of stuff to let us open and close lines with going into
@@ -453,13 +458,9 @@ nnoremap <silent> <M-7> :7wincmd w<CR>
 nnoremap <silent> <M-8> :8wincmd w<CR>
 nnoremap <silent> <M-9> :9wincmd w<CR>
 
-set statusline=
-set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y
-set statusline+=%#error#
-set statusline+=[[%{winnr()}]] "show current window
-set statusline+=%#todo#%-{fugitive#statusline()}%*
-set statusline+=%=%c,%l/%L\ %P
-
-au BufRead,BufNewFile *.sc set filetype=scala
-au BufRead,BufNewFile *.scala set filetype=scala
-
+"set statusline=
+"set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y
+"set statusline+=%#error#
+"set statusline+=[[%{winnr()}]] "show current window
+"set statusline+=%#todo#%-{fugitive#statusline()}%*
+"set statusline+=%=%c,%l/%L\ %P
