@@ -12,7 +12,7 @@ set ruler
 set mouse=a
 set nobackup
 set noswapfile
-set virtualedit=all
+set virtualedit=""
 set cursorline
 set noautochdir " automatically change the directory to the current working file
 set t_Co=256
@@ -43,8 +43,10 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/Align'
+Bundle 'davidhalter/jedi-vim'
 Bundle 'vim-scripts/SQLUtilities'
 Bundle 'ivanov/vim-ipython'
+Bundle 'https://github.com/chreekat/vim-paren-crosshairs.git'
 Bundle 'nanotech/jellybeans.vim'
 " <C-W>o to zoom/unzoom
 Bundle 'vim-scripts/ZoomWin'
@@ -184,6 +186,7 @@ nnoremap ,t1 :set tags=~/reps/Airtime/tags<CR>
 nnoremap ,t2 :set tags=~/reps/Airtime/python_apps/tags<CR>
 nnoremap ,t3 :set tags=~/reps/Airtime/python_apps/media-monitor2/tags<CR>
 nnoremap ,t4 :set tags=~/reps/Airtime/airtime_mvc/application/tags<CR>
+nnoremap ,tc :tabclose<CR>
 "cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
 "Execute the line under the cursor
@@ -224,6 +227,9 @@ vnoremap <silent> ,ql :! sqlasaservice.py<CR>
 nnoremap <silent> ,[[ V20<<<ESC>
 nnoremap <silent> ,cap :call SetCapsToCtrl()<CR>
 nnoremap <silent> ,re :w<CR>:Git checkout %<CR>
+nnoremap <silent> ,ds ciw <ESC>
+nnoremap <silent> <C-tab> :tabnext<CR>
+nnoremap <silent> <C-S-tab> :tabprev<CR>
 
 "{{{ folding toggle function
 let g:FoldMethod=1
@@ -418,7 +424,7 @@ function! DelEmptyLineAbove()
   end
 endfunction
 
-nnoremap  <silent> <leader>. :call Ocaml_print_type("normal")<CR>
+nnoremap <silent> <leader>. :call Ocaml_print_type("normal")<CR>
 vnoremap <silent> <LocalLeader>. :<C-U>call Ocaml_print_type("visual")<CR>`<
 
 " for pesky machines (Should be probably be in .xinit or at least bashrc
@@ -446,6 +452,8 @@ nnoremap - <C-W>-
 nnoremap + <C-W>+
 nnoremap <M-<> <C-W><
 nnoremap <M->> <C-W>>
+nnoremap za zA
+nnoremap zA za
 
 " navigate windows with alt keys
 nnoremap <silent> <M-1> :1wincmd w<CR>
