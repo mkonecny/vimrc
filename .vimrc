@@ -23,6 +23,7 @@ set t_vb=
 set guioptions-=r
 set winaltkeys=no
 set guioptions-=T
+set backspace=indent,eol,start
 set guioptions-=l
 set go-=R
 set go-=L
@@ -75,6 +76,7 @@ Bundle 'kana/vim-textobj-user'
 Bundle 'ciaranm/inkpot'
 Bundle 'chrisv/vim-chrisv'
 Bundle 'darktango.vim'
+"Bundle 'Valloric/YouCompleteMe'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'Lokaltog/vim-powerline'
@@ -153,10 +155,16 @@ nnoremap <silent> <C-f>D     :FufDir<CR>
 nnoremap <silent> <C-j>      :CtrlPMRU<CR>
 nnoremap <silent> <C-k>      :FufMruCmd<CR>
 nnoremap <silent> <C-b>      :FufBookmarkDir<CR>
-nnoremap <silent> <C-f><C-t> :FufTag<CR>
-nnoremap <silent> <C-f>t     :FufTag!<CR>
+"nnoremap <silent> <C-f><C-t> :FufTag<CR>
+" search for tag somewhere
+nnoremap <silent> <C-f><C-f> :CtrlPTag<CR>
+"nnoremap <silent> <C-f>t     :FufTag!<CR>
+"search for tag in buffer
+nnoremap <silent> <C-f>t     :CtrlPBufTag<CR>
 nnoremap <silent> g]         :FufTagWithCursorWord!<CR>
-nnoremap <silent> <C-f><C-f> :FufTaggedFile<CR>
+"search for tag in all buffers
+nnoremap <silent> <C-f><C-t> :CtrlPBufTagAll<CR>
+"nnoremap <silent> <C-f><C-f> :FufTaggedFile<CR>
 nnoremap <silent> <C-f><C-j> :FufJumpList<CR>
 nnoremap <silent> <C-f><C-g> :FufChangeList<CR>
 nnoremap <silent> <C-f><C-q> :FufQuickfix<CR>
@@ -218,7 +226,7 @@ inoremap jk <esc>
 "inoremap <esc> <nop>
 "open last search in quickfix window
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
-nnoremap ,, :cd ..<CR>
+nnoremap ,, :cd ..<CR>:pwd<CR>
 nnoremap ,pw :pwd <CR>                                            G
 nnoremap ,c1 :cd ~/Airtime/<CR>
 nnoremap ,c2 :cd ~/Airtime/python_apps/media-monitor2<CR>
@@ -355,7 +363,8 @@ autocmd FileType ocaml nnoremap ,ic T*ct*
 
 "let g:ocaml_folding=1
 let g:syntastic_ocaml_use_janestreet_core=1
-let g:syntastic_ocaml_janestreet_core_dir="~/.opam/4.00.0/lib/core/"
+let g:syntastic_ocaml_janestreet_core_dir="/home/rudi/.opam/4.00.1/lib/core/"
+"let g:syntastic_ocaml_use_ocamlbuild=1
 
 autocmd FileType python set nonu "python mode insists on turning this on...
 " Some idiotic plugin goes out of it's way to turn on line numberings...
@@ -368,14 +377,10 @@ set colorcolumn=80
 let $PATH=$PATH . ':' . expand("~/.cabal/bin")
 let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/UltiSnips"]
 let g:haddock_browser="firefox"
-"let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_enable_underbar_completion=1
-" proper omnicompletion through neocomplete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType python UltiSnipsAddFiletypes python
 autocmd FileType ocaml UltiSnipsAddFiletypes ocaml
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
@@ -472,3 +477,4 @@ nnoremap <silent> <M-9> :9wincmd w<CR>
 "set statusline+=[[%{winnr()}]] "show current window
 "set statusline+=%#todo#%-{fugitive#statusline()}%*
 "set statusline+=%=%c,%l/%L\ %P
+let g:ctrlp_extensions = ['tag']
