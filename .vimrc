@@ -52,6 +52,7 @@ Bundle 'nanotech/jellybeans.vim'
 " <C-W>o to zoom/unzoom
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'Yggdroot/indentLine'
 "Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
@@ -85,14 +86,15 @@ Bundle 'Lokaltog/vim-powerline'
 "included in distro nowadays
 "Bundle 'mirell/vim-matchit'
 Bundle 'vim-scripts/searchfold.vim'
-Bundle 'vim-scripts/SearchComplete'
-Bundle 'jesstelford/phpfolding.vim'
+"Bundle 'vim-scripts/SearchComplete'
+"Bundle 'jesstelford/phpfolding.vim'
 "has annoying bugs
 "Bundle "spf13/PIV"
 "takes too much screen space
 "Bundle 'vim-scripts/ShowMarks'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'majutsushi/tagbar'
@@ -108,6 +110,7 @@ Bundle 'rson/vim-conque'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
+Bundle 'troydm/easybuffer.vim'
 "we use vam for the next two plugins
 "Bundle 'MarcWeber/vim-addon-ocaml'
 "Bundle 'jrk/vim-ocaml'
@@ -123,7 +126,7 @@ Bundle 'vim-scripts/bufkill.vim'
 Bundle 'vim-scripts/vimwiki'
 Bundle 'rgrinberg/vim-slime'
 "Bundle 'xolog/vim-easytags'
-Bundle 'vim-scripts/taglist.vim'
+"Bundle 'vim-scripts/taglist.vim'
 "Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
 "Bundle 'torandu/vim-bufexplorer'
@@ -147,7 +150,7 @@ let g:fuf_mrufile_exclude='\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
 nnoremap <silent> <C-n>      :CtrlPBuffer<CR>
 " we don't want this anymore becasue we are using ctrlp for that
 "nnoremap <silent> <C-p>      :FufFileWithCurrentBufferDir<CR>
-nnoremap <silent> <C-f><C-p> :FufFileWithFullCwd<CR>
+nnoremap <silent> <C-f><C-p> :CtrlPCurWD<CR>
 nnoremap <silent> <C-f>p     :FufFile<CR>
 nnoremap <silent> <C-f><C-d> :FufDirWithCurrentBufferDir<CR>
 nnoremap <silent> <C-f>d     :FufDirWithFullCwd<CR>
@@ -180,7 +183,7 @@ nnoremap <C-F1> :cprev<CR>
 nnoremap <silent> <F2> :silent noh<CR>
 nnoremap <silent> <F3> :BD<CR>
 nnoremap <silent> <C-F4> :NERDTree<CR>
-nnoremap <silent> <F6> :TagbarToggle<CR>
+nnoremap <silent> <F6> :EasyBuffer<CR>
 nnoremap <silent> <F7> :call ToggleFold()<CR>
 nnoremap <F8> :Git pull<CR>
 nnoremap <C-F8> :Git push<CR>  
@@ -257,7 +260,7 @@ endfun
 "color theme settings"{{{
 set background=dark
 if has('gui_running')
-  colorscheme jellybeans
+  colorscheme inkpot
 else
   colorscheme jellybeans
 endif
