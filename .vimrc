@@ -44,6 +44,7 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/Align'
+"Bundle 'vim-scripts/Mark--Karkat'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'vim-scripts/SQLUtilities'
 Bundle 'ivanov/vim-ipython'
@@ -53,13 +54,14 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'Yggdroot/indentLine'
+Bundle 'rgrinberg/merlin', {'rtp' : 'vim/'}
 "Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'SirVer/ultisnips'
 Bundle 'Shougo/vimproc'
-Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neocomplcache'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'ujihisa/neco-ghc'
 "doesn't work unfortunately
@@ -93,6 +95,7 @@ Bundle 'vim-scripts/searchfold.vim'
 "takes too much screen space
 "Bundle 'vim-scripts/ShowMarks'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-repeat'
@@ -363,15 +366,17 @@ autocmd FileType php setlocal fdm=manual
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,ic T*ct*
+autocmd FileType ocaml source /home/rudi/.opam/4.00.1/share/typerex/ocp-indent/ocp-indent.vim
 
 "let g:ocaml_folding=1
 let g:syntastic_ocaml_use_janestreet_core=1
 let g:syntastic_ocaml_janestreet_core_dir="/home/rudi/.opam/4.00.1/lib/core/"
 "let g:syntastic_ocaml_use_ocamlbuild=1
+let g:syntastic_ocaml_checkers = ['merlin']
 
 autocmd FileType python set nonu "python mode insists on turning this on...
 " Some idiotic plugin goes out of it's way to turn on line numberings...
-set nonumber
+set nonumber 
 autocmd FileType * set nonumber
 set nosol
 set colorcolumn=80
@@ -388,50 +393,6 @@ autocmd FileType python UltiSnipsAddFiletypes python
 autocmd FileType ocaml UltiSnipsAddFiletypes ocaml
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" A whole bunch of stuff to let us open and close lines with going into
-" insert mode
-
-function! AddEmptyLineBelow()
-  call append(line("."), "")
-endfunction
-
-function! AddEmptyLineAbove()
-  let l:scrolloffsave=&scrolloff
-  " Avoid jerky scrolling with ^E at top of window
-  set scrolloff=0
-  call append(line(".") - 1, "")
-  if winline() != winheight(0)
-    silent normal! <C-e>
-  end
-  let &scrolloff=l:scrolloffsave
-endfunction
-
-function! DelEmptyLineBelow()
-  if line(".") == line("$")
-    return
-  end
-  let l:line=getline(line(".") + 1)
-  if l:line =~ '^\s*$'
-    let l:colsave=col(".")
-    .+1d
-    ''
-    call cursor(line("."), l:colsave)
-  end
-endfunction
-
-function! DelEmptyLineAbove()
-  if line(".") == 1
-    return
-  end
-  let l:line=getline(line(".") - 1)
-  if l:line =~ '^\s*$'
-    let l:colsave=col(".")
-    .-1d
-    silent normal! <C-y>
-    call cursor(line("."), l:colsave)
-  end
-endfunction
-
 nnoremap <silent> <leader>. :call Ocaml_print_type("normal")<CR>
 vnoremap <silent> <LocalLeader>. :<C-U>call Ocaml_print_type("visual")<CR>`<
 
@@ -441,11 +402,6 @@ function! SetCapsToCtrl()
     call system('setxkbmap -option ctrl:nocaps')
 endfunction
 call SetCapsToCtrl()
-
-nnoremap <silent> <A-d> :call DelEmptyLineBelow()<CR>
-nnoremap <silent> <A-D> :call DelEmptyLineAbove()<CR>
-nnoremap <silent> <A-o> :call AddEmptyLineBelow()<CR>
-nnoremap <silent> <A-O> :call AddEmptyLineAbove()<CR>
 
 "au VimEnter * RainbowParenthesesToggle
 "au Syntax * RainbowParenthesesLoadRound
@@ -481,3 +437,4 @@ nnoremap <silent> <M-9> :9wincmd w<CR>
 "set statusline+=%#todo#%-{fugitive#statusline()}%*
 "set statusline+=%=%c,%l/%L\ %P
 let g:ctrlp_extensions = ['tag']
+
