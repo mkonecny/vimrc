@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-# A little perl script m
+# A little perl script to quickly move files to my gdrive dir 
 use strict;
 use warnings;
 use File::Spec::Functions;
