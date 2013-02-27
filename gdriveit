@@ -1,0 +1,45 @@
+#!/usr/bin/perl -w
+# A little perl script m
+use strict;
+use warnings;
+use File::Spec::Functions;
+use File::Copy qw(move);
+use File::Basename qw(basename);
+
+my $home_dir = $ENV{HOME};
+my $gdrive_path = 'Insync/rudi.grinberg@gmail.com/';
+
+unless (-d $home_dir) {
+    print "Home directory is supposed to be @ '$home_dir'\n";
+    print "But it does exist. Aborting.\n";
+    exit -1;
+}
+
+my $full_gdrive = catfile($home_dir, $gdrive_path);
+
+unless (-d $full_gdrive) {
+    print "Assume path of gdrive: '$full_gdrive' does not exist";
+    exit -1;
+}
+
+
+unless (@ARGV) {
+    my $prog = basename($0);
+    print "$prog f1 f2 f3 to move files to $full_gdrive\n";
+    exit 0;
+}
+
+foreach my $file(@ARGV) {
+    unless (-e $file) {
+        print "'$file' does exist \n. Aborting.";
+        exit 1;
+    }
+    my $new_path = catfile($full_gdrive, basename($file));
+    if (move($file, $new_path)) {
+        print "$file ---> $new_path\n";
+    } else {
+        print "failed to move '$file' to '$new_path'\n";
+    }
+}
+
+
