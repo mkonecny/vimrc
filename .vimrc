@@ -28,6 +28,9 @@ set guioptions-=l
 set go-=R
 set go-=L
 set tags=./tags
+set ssop-=options "do not store global and local values in session
+set ssop-=folds "do not store folds
+
 "Spelling intereferes with colorschemes greatly. Hence it must go
 "setlocal spell spelllang=en_us
 "set spell
@@ -89,7 +92,6 @@ Bundle 'Lokaltog/vim-powerline'
 "Bundle 'mirell/vim-matchit'
 Bundle 'vim-scripts/searchfold.vim'
 "Bundle 'vim-scripts/SearchComplete'
-"Bundle 'jesstelford/phpfolding.vim'
 "has annoying bugs
 "Bundle "spf13/PIV"
 "takes too much screen space
@@ -181,11 +183,10 @@ vnoremap <silent> <C-f><C-b> :FufAddBookmarkAsSelectedText<CR>
 nnoremap <silent> <C-f><C-e> :FufEditInfo<CR>
 nnoremap <silent> <C-f><C-r> :FufRenewCache<CR>
 "}}}
-nnoremap <F1> :cnext<CR>
-nnoremap <C-F1> :cprev<CR>
 nnoremap <silent> <F2> :silent noh<CR>
 nnoremap <silent> <F3> :BD<CR>
 nnoremap <silent> <C-F4> :NERDTree<CR>
+nnoremap <silent> <F4> :Git diff --staged<CR>
 nnoremap <silent> <F6> :EasyBuffer<CR>
 nnoremap <silent> <F7> :call ToggleFold()<CR>
 nnoremap <F8> :Git pull<CR>
@@ -195,12 +196,8 @@ nnoremap <silent> <C-F9> @@N
 nnoremap <silent> <F10> :edit!<CR>
 nnoremap <silent> <F11> :GundoToggle<CR>
 let g:EasyMotion_leader_key='<F12>'
-"There should be a better of doing this
-nnoremap ,t1 :set tags=~/reps/Airtime/tags<CR>
-nnoremap ,t2 :set tags=~/reps/Airtime/python_apps/tags<CR>
-nnoremap ,t3 :set tags=~/reps/Airtime/python_apps/media-monitor2/tags<CR>
-nnoremap ,t4 :set tags=~/reps/Airtime/airtime_mvc/application/tags<CR>
 nnoremap ,tc :tabclose<CR>
+nnoremap ,tn :tabnew<CR>
 "cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
 "Execute the line under the cursor
@@ -243,6 +240,7 @@ nnoremap <silent> ,cap :call SetCapsToCtrl()<CR>
 nnoremap <silent> ,re :w<CR>:Git checkout %<CR>
 nnoremap <silent> ,ds ciw <ESC>
 nnoremap <silent> <C-tab> :tabnext<CR>
+nnoremap <silent> \ss :call OCaml_switch(0)<CR>
 nnoremap <silent> <C-S-tab> :tabprev<CR>
 
 "{{{ folding toggle function
@@ -297,7 +295,6 @@ let g:miniBufExplModSelTarget=1
 "}}}
 "random formatting settings
 let g:sqlutil_align_comma=1
-let g:PHP_autoformatcomment=0
 "javascript/html indentation"{{{
 let g:html_indent_inctags="html,body,head,tbody"
 let g:html_indent_script1="inc"
@@ -343,12 +340,6 @@ iabbrev yiedl yield
 iabbrev __class __class__
 iabbrev __name __name__
 iabbrev convinience convenience
-"fast 'java' style definition
-iabbrev psf public static function
-"php debugging function
-iabbrev logi Logging::info
-iabbrev logw Logging::warn
-iabbrev logd logging::debug
 "}}}
 set tabstop=4
 set shiftwidth=4
@@ -359,9 +350,6 @@ set wrapmargin=0
 set textwidth=0
 set foldmethod=indent
 set formatprg=par
-
-" we have a special folding script for php
-autocmd FileType php setlocal fdm=manual
 
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
@@ -420,6 +408,7 @@ nnoremap za zA
 nnoremap zA za
 
 " navigate windows with alt keys
+" TODO : fix this boilerplate
 nnoremap <silent> <M-1> :1wincmd w<CR>
 nnoremap <silent> <M-2> :2wincmd w<CR>
 nnoremap <silent> <M-3> :3wincmd w<CR>
