@@ -57,7 +57,7 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'Yggdroot/indentLine'
-Bundle 'rgrinberg/merlin', {'rtp' : 'vim/'}
+Bundle 'rgrinberg/merlin', {'v' : 'personal', 'rtp' : 'vim/'}
 "Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
@@ -77,7 +77,7 @@ Bundle 'mru.vim'
 "Bundle 'joonty/vim-xdebug'
 Bundle 'danro/rename.vim'
 Bundle 'hickop'
-Bundle 'oceandeep'
+"Bundle 'oceandeep'
 Bundle 'kana/vim-textobj-user'
 Bundle 'ciaranm/inkpot'
 Bundle 'chrisv/vim-chrisv'
@@ -90,7 +90,7 @@ Bundle 'Lokaltog/vim-powerline'
 "Bundle 'kien/rainbow_parentheses.vim'
 "included in distro nowadays
 "Bundle 'mirell/vim-matchit'
-Bundle 'vim-scripts/searchfold.vim'
+"Bundle 'vim-scripts/searchfold.vim'
 "Bundle 'vim-scripts/SearchComplete'
 "has annoying bugs
 "Bundle "spf13/PIV"
@@ -106,13 +106,13 @@ Bundle 'majutsushi/tagbar'
 "Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'ervandew/supertab'
-Bundle 'altercation/vim-colors-solarized'
+"Bundle 'altercation/vim-colors-solarized'
 " perl-support bundle somehow messes up with indentation somehow
 " also messes up ctrl-j
 "Bundle 'vim-scripts/perl-support.vim'
 "Bundle 'klen/python-mode'
 Bundle 'rson/vim-conque'
-Bundle 'kchmck/vim-coffee-script'
+"Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
 Bundle 'troydm/easybuffer.vim'
@@ -121,15 +121,14 @@ Bundle 'troydm/easybuffer.vim'
 "Bundle 'jrk/vim-ocaml'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rvm'
-Bundle 'therubymug/vim-pyte'
-Bundle 'jnurmine/Zenburn'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
+"Bundle 'therubymug/vim-pyte'
+"Bundle 'jnurmine/Zenburn'
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'https://github.com/jpo/vim-railscasts-theme.git'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'vim-scripts/vimwiki'
-Bundle 'rgrinberg/vim-slime'
+Bundle 'jpalardy/vim-slime'
 "Bundle 'xolog/vim-easytags'
 "Bundle 'vim-scripts/taglist.vim'
 "Bundle 'lukerandall/haskellmode-vim'
@@ -141,8 +140,15 @@ Bundle 'pangloss/vim-javascript'
 "Bundle 'LStinson/perlhelp-vim'
 Bundle 'skammer/vim-css-color'
 Bundle 'kien/ctrlp.vim'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'tpope/vim-obsession'
+Bundle 'tpope/vim-rake'
+Bundle 'tpope/vim-bundler'
 "}}}
-filetype plugin indent on
+syntax on
+filetype on
+filetype indent on
+filetype plugin on
 
 let NERDTreeIgnore=['\.pyc$','\.o$','\.cmi$','\.cmx$','\.cmo$']
 "fuzzy find settings"{{{
@@ -351,6 +357,10 @@ set textwidth=0
 set foldmethod=indent
 set formatprg=par
 
+autocmd FileType ruby set expandtab
+autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType ruby set autoindent
+
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,ic T*ct*
@@ -380,6 +390,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python UltiSnipsAddFiletypes python
 autocmd FileType ocaml UltiSnipsAddFiletypes ocaml
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
 nnoremap <silent> <leader>. :call Ocaml_print_type("normal")<CR>
 vnoremap <silent> <LocalLeader>. :<C-U>call Ocaml_print_type("visual")<CR>`<
@@ -427,3 +438,6 @@ nnoremap <silent> <M-9> :9wincmd w<CR>
 "set statusline+=%=%c,%l/%L\ %P
 let g:ctrlp_extensions = ['tag']
 
+let g:necoghc_enable_detailed_browse = 1
+
+autocmd FileType ruby compiler ruby
