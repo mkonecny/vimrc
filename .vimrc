@@ -7,8 +7,6 @@ set hlsearch
 set ignorecase
 set smartcase
 set ruler
-" not very smart after all...
-"set smartindent
 set mouse=a
 set nobackup
 set noswapfile
@@ -62,7 +60,7 @@ Bundle 'rgrinberg/merlin', {'v' : 'personal', 'rtp' : 'vim/'}
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'SirVer/ultisnips'
+Bundle 'rgrinberg/ultisnips'
 Bundle 'Shougo/vimproc'
 "Bundle 'Shougo/neocomplcache'
 Bundle 'eagletmt/ghcmod-vim'
@@ -106,19 +104,11 @@ Bundle 'majutsushi/tagbar'
 "Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'ervandew/supertab'
-"Bundle 'altercation/vim-colors-solarized'
-" perl-support bundle somehow messes up with indentation somehow
-" also messes up ctrl-j
-"Bundle 'vim-scripts/perl-support.vim'
-"Bundle 'klen/python-mode'
 Bundle 'rson/vim-conque'
 "Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
 Bundle 'troydm/easybuffer.vim'
-"we use vam for the next two plugins
-"Bundle 'MarcWeber/vim-addon-ocaml'
-"Bundle 'jrk/vim-ocaml'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-rvm'
@@ -135,9 +125,7 @@ Bundle 'jpalardy/vim-slime'
 Bundle 'mileszs/ack.vim'
 "Bundle 'torandu/vim-bufexplorer'
 "Doesn't play well with fuzzyfinder swithc buffer
-"Bundle 'fholgado/minibufexpl.vim'
 Bundle 'pangloss/vim-javascript'
-"Bundle 'LStinson/perlhelp-vim'
 Bundle 'skammer/vim-css-color'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-ruby/vim-ruby'
@@ -192,24 +180,19 @@ nnoremap <silent> <C-f><C-r> :FufRenewCache<CR>
 nnoremap <silent> <F2> :silent noh<CR>
 nnoremap <silent> <F3> :BD<CR>
 nnoremap <silent> <C-F4> :NERDTree<CR>
-nnoremap <silent> <F4> :Git diff --staged<CR>
+nnoremap <silent> <C-F5> :Git diff --staged<CR>
+nnoremap <silent> <F5> :Git diff<CR>
 nnoremap <silent> <F6> :EasyBuffer<CR>
-nnoremap <silent> <F7> :call ToggleFold()<CR>
 nnoremap <F8> :Git pull<CR>
 nnoremap <C-F8> :Git push<CR>  
-nnoremap <silent> <F9> @@n
-nnoremap <silent> <C-F9> @@N
 nnoremap <silent> <F10> :edit!<CR>
 nnoremap <silent> <F11> :GundoToggle<CR>
-let g:EasyMotion_leader_key='<F12>'
 nnoremap ,tc :tabclose<CR>
 nnoremap ,tn :tabnew<CR>
 "cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
 "Execute the line under the cursor
 nnoremap ,el yy:! <C-R><C-0><BS><CR>
-"Set this keymapping only for ocaml mode (and perhaps _oasis files too)
-nnoremap ,ob :! ocaml setup.ml -all<CR>
 nnoremap ,o4 :! camlp4of % -printer o<CR>
 "edit vimrc
 nnoremap ,ev :e ~/.vimrc<CR>
@@ -237,9 +220,6 @@ inoremap jk <esc>
 nnoremap <silent> ,/ :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 nnoremap ,, :cd ..<CR>:pwd<CR>
 nnoremap ,pw :pwd <CR>                                            G
-nnoremap ,c1 :cd ~/Airtime/<CR>
-nnoremap ,c2 :cd ~/Airtime/python_apps/media-monitor2<CR>
-nnoremap ,c3 :cd ~/Airtime/python_apps/<CR>
 vnoremap <silent> ,ql :! sqlasaservice.py<CR>
 nnoremap <silent> ,[[ V20<<<ESC>
 nnoremap <silent> ,cap :call SetCapsToCtrl()<CR>
@@ -249,33 +229,37 @@ nnoremap <silent> <C-tab> :tabnext<CR>
 nnoremap <silent> \ss :call OCaml_switch(0)<CR>
 nnoremap <silent> <C-S-tab> :tabprev<CR>
 
-"{{{ folding toggle function
-let g:FoldMethod=1
-fun! ToggleFold()
-    if g:FoldMethod == 0
-        exe 'set foldmethod=indent'
-        let g:FoldMethod=1
-        echo 'indent'
-    else
-        exe 'set foldmethod=marker'
-        let g:FoldMethod=0
-        echo 'marker'
-    endif
-endfun
-"}}}
-
-"color theme settings"{{{
 set background=dark
 if has('gui_running')
   colorscheme inkpot
 else
   colorscheme jellybeans
 endif
-"}}}
 
 function! IsLaptop()
     return system('hostname -s') =~ 'rudi-UX31A'
 endfunction
+
+function! MyCloseDiff()
+    if (&diff == 0 || getbufvar('#', '&diff') == 0)
+                \ && (bufname('%') !~ '^fugitive:' && bufname('#') !~ '^fugitive:')
+        echom "Not in diff view."
+        return
+    endif
+
+    " close current buffer if alternate is not fugitive but current one is
+    if bufname('#') !~ '^fugitive:' && bufname('%') =~ '^fugitive:'
+        if bufwinnr("#") == -1
+            b #
+            bd #
+        else
+            bd
+        endif
+    else
+        bd #
+    endif
+endfunction
+nnoremap <Leader>gD :call MyCloseDiff()<cr>
 
 " bigger font for laptop screen
 if IsLaptop()
@@ -364,9 +348,10 @@ autocmd FileType ruby set autoindent
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,ic T*ct*
+"TODO : fix this
 autocmd FileType ocaml source /home/rudi/.opam/4.00.1/share/typerex/ocp-indent/ocp-indent.vim
 
-"let g:ocaml_folding=1
+"let g:ocaml_folding=1 "slows shit down too much
 let g:syntastic_ocaml_use_janestreet_core=1
 let g:syntastic_ocaml_janestreet_core_dir="/home/rudi/.opam/4.00.1/lib/core/"
 "let g:syntastic_ocaml_use_ocamlbuild=1
@@ -381,7 +366,7 @@ set colorcolumn=80
 "let g:haskell_conceal_wide=1
 " in case neco-ghc donesn't work
 let $PATH=$PATH . ':' . expand("~/.cabal/bin")
-let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/UltiSnips"]
+let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/bundle/ultisnips/UltiSnips/"]
 let g:haddock_browser="firefox"
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -401,11 +386,6 @@ function! SetCapsToCtrl()
     call system('setxkbmap -option ctrl:nocaps')
 endfunction
 call SetCapsToCtrl()
-
-"au VimEnter * RainbowParenthesesToggle
-"au Syntax * RainbowParenthesesLoadRound
-"au Syntax * RainbowParenthesesLoadSquare
-"au Syntax * RainbowParenthesesLoadBraces
 
 nnoremap s <C-W>
 let NERDTreeMapOpenVSplit='\s'
