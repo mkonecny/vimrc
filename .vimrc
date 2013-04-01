@@ -60,7 +60,7 @@ Bundle 'rgrinberg/merlin', {'v' : 'personal', 'rtp' : 'vim/'}
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'rgrinberg/ultisnips'
+Bundle 'SirVer/ultisnips'
 Bundle 'Shougo/vimproc'
 "Bundle 'Shougo/neocomplcache'
 Bundle 'eagletmt/ghcmod-vim'
@@ -88,7 +88,7 @@ Bundle 'Lokaltog/vim-powerline'
 "Bundle 'kien/rainbow_parentheses.vim'
 "included in distro nowadays
 "Bundle 'mirell/vim-matchit'
-"Bundle 'vim-scripts/searchfold.vim'
+Bundle 'vim-scripts/searchfold.vim'
 "Bundle 'vim-scripts/SearchComplete'
 "has annoying bugs
 "Bundle "spf13/PIV"
@@ -121,7 +121,7 @@ Bundle 'vim-scripts/vimwiki'
 Bundle 'jpalardy/vim-slime'
 "Bundle 'xolog/vim-easytags'
 "Bundle 'vim-scripts/taglist.vim'
-"Bundle 'lukerandall/haskellmode-vim'
+Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
 "Bundle 'torandu/vim-bufexplorer'
 "Doesn't play well with fuzzyfinder swithc buffer
@@ -421,3 +421,7 @@ let g:ctrlp_extensions = ['tag']
 let g:necoghc_enable_detailed_browse = 1
 
 autocmd FileType ruby compiler ruby
+let g:ghc="/usr/bin/ghc"
+let g:haddock_browser="/usr/bin/firefox"
+au FileType haskell compiler ghc
+
