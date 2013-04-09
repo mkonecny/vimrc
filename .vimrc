@@ -39,7 +39,6 @@ set fillchars=vert:│    " that's a vertical box-drawing character
 "let g:UltiSnipsExpandTrigger="<c-tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-'>"
 
-"Vundle stuff"{{{
 let g:vundle_default_git_proto='git'
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
@@ -121,7 +120,7 @@ Bundle 'vim-scripts/vimwiki'
 Bundle 'jpalardy/vim-slime'
 "Bundle 'xolog/vim-easytags'
 "Bundle 'vim-scripts/taglist.vim'
-Bundle 'lukerandall/haskellmode-vim'
+"Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
 "Bundle 'torandu/vim-bufexplorer'
 "Doesn't play well with fuzzyfinder swithc buffer
@@ -132,20 +131,20 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-obsession'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-bundler'
-"}}}
+Bundle 'paradigm/TextObjectify'
 syntax on
 filetype on
 filetype indent on
 filetype plugin on
 
 let NERDTreeIgnore=['\.pyc$','\.o$','\.cmi$','\.cmx$','\.cmo$']
-"fuzzy find settings"{{{
+
 let g:fuf_modesDisable=[]
 let g:fuf_mrufile_maxItem=1000
 let g:fuf_mrucmd_maxItem=400
 let g:fuf_mrufile_exclude='\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
-"}}}
-"Fuzzy find keys"{{{
+
+
 nnoremap <silent> <C-n>      :CtrlPBuffer<CR>
 " we don't want this anymore becasue we are using ctrlp for that
 "nnoremap <silent> <C-p>      :FufFileWithCurrentBufferDir<CR>
@@ -176,10 +175,10 @@ nnoremap <silent> <C-f><C-b> :FufAddBookmark<CR>
 vnoremap <silent> <C-f><C-b> :FufAddBookmarkAsSelectedText<CR>
 nnoremap <silent> <C-f><C-e> :FufEditInfo<CR>
 nnoremap <silent> <C-f><C-r> :FufRenewCache<CR>
-"}}}
 nnoremap <silent> <F2> :silent noh<CR>
 nnoremap <silent> <F3> :BD<CR>
 nnoremap <silent> <C-F4> :NERDTree<CR>
+nnoremap <silent> <F4> gg=G``
 nnoremap <silent> <C-F5> :Git diff --staged<CR>
 nnoremap <silent> <F5> :Git diff<CR>
 nnoremap <silent> <F6> :EasyBuffer<CR>
@@ -277,21 +276,16 @@ let g:ackprg="ack -H --nocolor --nogroup --column"
 let g:pymode_lint_write=0
 let g:pymode_run_key='R'
 
-"minibufexplr settings"{{{
 let g:miniBufExplMapWindowNavVim=1
 let g:miniBufExplMapWindowNavArrows=1
 let g:miniBufExplMapCTabSwitchBufs=1
 let g:miniBufExplModSelTarget=1
-"}}}
 "random formatting settings
 let g:sqlutil_align_comma=1
-"javascript/html indentation"{{{
 let g:html_indent_inctags="html,body,head,tbody"
 let g:html_indent_script1="inc"
 let g:html_indent_style1="inc"
 let g:gundo_right=1
-"}}}
-"abbreviations"{{{
 iabbrev pust puts
 iabbrev coutn count
 iabbrev foudn found
@@ -314,8 +308,6 @@ iabbrev p_el print_endline
 iabbrev dependacies dependencies
 iabbrev dependancies dependencies
 iabbrev pfpf Printf.printf
-iabbrev let_ let _ =
-iabbrev letu let () =
 iabbrev iofs int_of_string
 iabbrev sofi string_of_int
 iabbrev fofs float_of_string
@@ -330,7 +322,6 @@ iabbrev yiedl yield
 iabbrev __class __class__
 iabbrev __name __name__
 iabbrev convinience convenience
-"}}}
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -348,7 +339,7 @@ autocmd FileType ruby set autoindent
 autocmd FileType ocaml setlocal commentstring=(*%s*)
 autocmd FileType ocaml setlocal shiftwidth=2
 autocmd FileType ocaml nnoremap ,ic T*ct*
-"TODO : fix this
+"TODO : fix this hard coded stuff
 autocmd FileType ocaml source /home/rudi/.opam/4.00.1/share/typerex/ocp-indent/ocp-indent.vim
 
 "let g:ocaml_folding=1 "slows shit down too much
