@@ -94,6 +94,7 @@ Bundle 'vim-scripts/searchfold.vim'
 "takes too much screen space
 "Bundle 'vim-scripts/ShowMarks'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-abolish.git'
 Bundle 'tpope/vim-sensible'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
@@ -120,7 +121,7 @@ Bundle 'vim-scripts/vimwiki'
 Bundle 'jpalardy/vim-slime'
 "Bundle 'xolog/vim-easytags'
 "Bundle 'vim-scripts/taglist.vim'
-"Bundle 'lukerandall/haskellmode-vim'
+Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
 "Bundle 'torandu/vim-bufexplorer'
 "Doesn't play well with fuzzyfinder swithc buffer
@@ -132,6 +133,9 @@ Bundle 'tpope/vim-obsession'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-bundler'
 Bundle 'paradigm/TextObjectify'
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'rgrinberg/elm.vim.git'
+
 syntax on
 filetype on
 filetype indent on
@@ -144,6 +148,13 @@ let g:fuf_mrufile_maxItem=1000
 let g:fuf_mrucmd_maxItem=400
 let g:fuf_mrufile_exclude='\v\~$|\.(bak|sw[po])$|^(\/\/|\\\\|\/mnt\/)'
 
+let g:multi_cursor_use_default_mapping=0
+" plugin doesn't work atm
+" Default mapping
+"let g:multi_cursor_next_key="\<C-s>"
+"let g:multi_cursor_prev_key="\<C-p>"
+"let g:multi_cursor_skip_key="\<C-x>"
+"let g:multi_cursor_exit_key="\<Esc>"
 
 nnoremap <silent> <C-n>      :CtrlPBuffer<CR>
 " we don't want this anymore becasue we are using ctrlp for that
@@ -169,7 +180,7 @@ nnoremap <silent> <C-f><C-t> :CtrlPBufTagAll<CR>
 nnoremap <silent> <C-f><C-j> :FufJumpList<CR>
 nnoremap <silent> <C-f><C-g> :FufChangeList<CR>
 nnoremap <silent> <C-f><C-q> :FufQuickfix<CR>
-nnoremap <silent> <C-f><C-l> :FufLine<CR>
+nnoremap <silent> <C-f><C-l> :CtrlPLine<CR>
 nnoremap <silent> <C-f><C-h> :FufHelp<CR>
 nnoremap <silent> <C-f><C-b> :FufAddBookmark<CR>
 vnoremap <silent> <C-f><C-b> :FufAddBookmarkAsSelectedText<CR>
@@ -181,7 +192,7 @@ nnoremap <silent> <C-F4> :NERDTree<CR>
 nnoremap <silent> <F4> gg=G``
 nnoremap <silent> <C-F5> :Git diff --staged<CR>
 nnoremap <silent> <F5> :Git diff<CR>
-nnoremap <silent> <F6> :EasyBuffer<CR>
+nnoremap <silent> <F6> :Reload<CR>:w<CR>
 nnoremap <F8> :Git pull<CR>
 nnoremap <C-F8> :Git push<CR>  
 nnoremap <silent> <F10> :edit!<CR>
@@ -367,6 +378,8 @@ autocmd FileType python UltiSnipsAddFiletypes python
 autocmd FileType ocaml UltiSnipsAddFiletypes ocaml
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+"autocmd FileType haskell nnoremap <buffer> \t :GhcModType<CR>
+"autocmd FileType haskell nnoremap <buffer> \c :GhcModClear<CR>
 
 nnoremap <silent> <leader>. :call Ocaml_print_type("normal")<CR>
 vnoremap <silent> <LocalLeader>. :<C-U>call Ocaml_print_type("visual")<CR>`<
