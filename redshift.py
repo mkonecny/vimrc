@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+
+# TODO : turn this script into a full launcher of all of mine background utils
+# set the default backlight as well (35)
+
+
 import json
 import urllib2
 from subprocess import Popen
@@ -17,6 +22,7 @@ full_cmd = "%s %s" % (cmd, args)
 
 print("Running with '%s'" % full_cmd)
 
+Popen(["xbacklight","-set","35"])
 Popen([cmd, args])
 
 
