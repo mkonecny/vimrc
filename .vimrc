@@ -400,7 +400,12 @@ let g:syntastic_ocaml_janestreet_core_dir="/home/rudi/.opam/4.00.1/lib/core/"
 let g:syntastic_ocaml_checkers = ['merlin']
 "nnoremap <silent> <leader>. :call Ocaml_print_type("normal")<CR>
 "vnoremap <silent> <LocalLeader>. :<C-U>call Ocaml_print_type("visual")<CR>`<
-autocmd FileType ocaml UltiSnipsAddFiletypes ocaml
+au FileType ocaml UltiSnipsAddFiletypes ocaml
+au FileType ocaml call SuperTabSetDefaultCompletionType("<c-x><c-o>")
+hi EnclosingExpr guibg=Black
+"other (failed) attempts
+"hi link EnclosingExpr CursorLine 
+"hi link EnclosingExpr DiffText 
 "}}}
 " random autocmds {{{
 au FileType python set nonu "python mode insists on turning this on...
@@ -425,7 +430,7 @@ nnoremap <silent> ,cap :call SetCapsToCtrl()<CR>
 "}}}
 " nerdtree settings {{{
 let NERDTreeMapOpenVSplit='\s'
-let NERDTreeIgnore=['\.pyc$','\.o$','\.cmi$','\.cmx$','\.cmo$']
+let NERDTreeIgnore=[ '\.pyc$','\.o$','\.cmi$', '\.cmx$','\.cmo$','\.cma$','\.so$','\.a$']
 "}}}
 " work arounds for some stuff {{{
 au vimenter * map s <C-W>
@@ -458,3 +463,4 @@ let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/bundle/ultisnips/UltiSnips/"
 "}}}
 
 " vim:fen:fdm=marker:fmr={{{,}}}:fdl=0:fdc=1:ts=2:sw=2:sts=2
+
