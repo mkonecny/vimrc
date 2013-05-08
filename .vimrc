@@ -1,7 +1,9 @@
 "{{{ normal settings
 set nocompatible
 set hidden
+set wildmode=full
 set wildmenu
+set wildignore=*.class,*.cma,*.cmi,*.cmxa,*.pyc,*.o
 set showcmd
 set incsearch
 set hlsearch
@@ -39,9 +41,11 @@ set fillchars=vert:│    " that's a vertical box-drawing character
 " Vundle {{{
 let g:vundle_default_git_proto='git'
 set rtp+=~/.vim/bundle/vundle
+set rtp+=/usr/local/share/ocamlmerlin/vim
 call vundle#rc()
 Bundle 'gmarik/vundle'
-Bundle 'vim-scripts/Align'
+"Bundle 'vim-scripts/Align'
+Bundle 'godlygeek/tabular'
 "Bundle 'vim-scripts/Mark--Karkat'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'vim-scripts/SQLUtilities'
@@ -52,7 +56,7 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'Yggdroot/indentLine'
-Bundle 'rgrinberg/merlin', {'v' : 'personal', 'rtp' : 'vim/'}
+"Bundle 'rgrinberg/merlin', {'v' : 'master', 'rtp' : 'vim/'}
 "Bundle 'dbext.vim'
 "set macmeta on macs
 Bundle 'maxbrunsfeld/vim-yankstack'
@@ -138,6 +142,7 @@ Bundle 'bitc/vim-hdevtools.git'
 Bundle 'altercation/vim-colors-solarized.git'
 Bundle 'glts/vim-textobj-comment.git'
 Bundle 'rking/ag.vim'
+Bundle 'dbakker/vim-projectroot'
 "}}}
 " syntax/filetype on {{{
 syntax on
@@ -145,6 +150,7 @@ filetype plugin indent on
 "}}}
 " general mappings {{{
 " CtrlP and Fuf mappings {{{
+nnoremap <silent> <C-p>      :CtrlP<CR>
 nnoremap <silent> <C-n>      :CtrlPBuffer<CR>
 " we don't want this anymore becasue we are using ctrlp for that
 "nnoremap <silent> <C-p>      :FufFileWithCurrentBufferDir<CR>
@@ -167,8 +173,8 @@ nnoremap <silent> g]         :FufTagWithCursorWord!<CR>
 nnoremap <silent> <C-f><C-t> :CtrlPBufTagAll<CR>
 "nnoremap <silent> <C-f><C-f> :FufTaggedFile<CR>
 nnoremap <silent> <C-f><C-j> :FufJumpList<CR>
-nnoremap <silent> <C-f><C-g> :FufChangeList<CR>
-nnoremap <silent> <C-f><C-q> :FufQuickfix<CR>
+nnoremap <silent> <C-f><C-g> :CtrlPChange<CR>
+nnoremap <silent> <C-f><C-q> :CtrlPQuickfix<CR>
 nnoremap <silent> <C-f><C-l> :CtrlPLine<CR>
 nnoremap <silent> <C-f><C-h> :FufHelp<CR>
 nnoremap <silent> <C-f><C-b> :FufAddBookmark<CR>
@@ -177,7 +183,7 @@ nnoremap <silent> <C-f><C-e> :FufEditInfo<CR>
 nnoremap <silent> <C-f><C-r> :CtrlPClearAllCaches<CR>
 " as opposed to
 "nnoremap <silent> <C-f><C-r> :CtrlPClearCache<CR>
-let g:ctrlp_extensions = ['tag']
+let g:ctrlp_extensions = ['tag', 'quickfix', 'line', 'buffertag']
 " fuf settings {{{
 let g:fuf_modesDisable=[]
 let g:fuf_mrufile_maxItem=1000
@@ -329,6 +335,7 @@ let g:html_indent_inctags="html,body,head,tbody"
 let g:html_indent_script1="inc"
 let g:html_indent_style1="inc"
 let g:gundo_right=1
+"au BufEnter * if &ft != 'help' | call ProjectRootCD() | endif
 "}}}
 " abbreviations {{{
 "replace this stuff with abolish
@@ -461,6 +468,17 @@ let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/bundle/ultisnips/UltiSnips/"
 "let g:UltiSnipsExpandTrigger="<c-tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-'>"
 "}}}
-
+"smart cwd settings {{{
+function! s:setcwd()
+  let cph = expand('%:p:h', 1)
+  if cph =~ '^.\+://' | retu | en
+  for mkr in ['.git/', '.hg/', '.svn/', '.bzr/', '_darcs/', '.vimprojects']
+    let wd = call('find'.(mkr =~ '/$' ? 'dir' : 'file'), [mkr, cph.';'])
+    if wd != '' | let &acd = 0 | brea | en
+  endfo
+  exe 'lc!' fnameescape(wd == '' ? cph : substitute(wd, mkr.'$', '.', ''))
+endfunction
+au BufEnter * call s:setcwd()
+"}}}
 " vim:fen:fdm=marker:fmr={{{,}}}:fdl=0:fdc=1:ts=2:sw=2:sts=2
 
