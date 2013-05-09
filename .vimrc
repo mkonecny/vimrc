@@ -44,6 +44,8 @@ set rtp+=~/.vim/bundle/vundle
 set rtp+=/usr/local/share/ocamlmerlin/vim
 call vundle#rc()
 Bundle 'gmarik/vundle'
+"doesn't exist yet
+"Bundle 'vim-scripts/prev_indent'
 "Bundle 'vim-scripts/Align'
 Bundle 'godlygeek/tabular'
 "Bundle 'vim-scripts/Mark--Karkat'
@@ -230,6 +232,7 @@ nnoremap <silent> <M-9> :9wincmd w<CR>
 " random mappings {{{
 "cd to the directory of the current buffer
 nnoremap ,cd :cd %:p:h<CR>
+:inoremap <C-D> <Esc>:call setline(".",substitute(getline(line(".")),'^\s*',matchstr(getline(line(".")-1),'^\s*'),''))<CR>I
 "Execute the line under the cursor
 nnoremap ,el yy:! <C-R><C-0><BS><CR>
 "edit vimrc
@@ -257,11 +260,11 @@ nnoremap <silent> ,re :w<CR>:Git checkout %<CR>
 nnoremap <silent> ,ds ciw <ESC>
 "}}}
 " alignment mappings {{{
-vnoremap ,a= :Align =<CR>
-vnoremap ,a, :Align ,<CR>
-vnoremap ,a: :Align :<CR>
-vnoremap ,a> :Align =><CR>
-vnoremap ,am :Align import<CR>
+vnoremap ,a= :Tab /=<CR>
+vnoremap ,a, :Tab /,<CR>
+vnoremap ,a: :Tab /:<CR>
+vnoremap ,a> :Tab /=><CR>
+vnoremap ,am :Tab /import<CR>
 "}}}
 " multi cursor mappings - plugin disabled {{{
 let g:multi_cursor_use_default_mapping=0
