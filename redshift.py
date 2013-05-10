@@ -1,9 +1,7 @@
 #!/usr/bin/env python
-from os.path import expanduser, exists
-import sys
-
 # TODO : turn this script into a full launcher of all of mine background utils
-
+import sys
+from os.path import expanduser, exists
 import json
 import urllib2
 from subprocess import Popen
@@ -11,13 +9,14 @@ from subprocess import Popen
 
 # TODO
 def instance_running(name):
-    psef = ""
+    # name is usually "/usr/bin/redshift"
+    psef = "/usr/bin/redshift"
     possible_instances = [p for p in psef.splitlines() if name in p]
-    return possible_instances > 1
+    return len(possible_instances) > 0
 
 
 def greet(data, cached_data):
-    print("--> %s, %s\n" % (city, country_name))
+    print("--> %s, %s\n" % (data[u'city'], data[u'country_name']))
     if cached_data:
         print("Using cached data")
     else:
@@ -42,6 +41,13 @@ url = 'http://freegeoip.net/json/'
 settings_file = expanduser("~/.redshift_location")
 
 data = None
+cached_data = False
+
+print("Redshift launcher...")
+
+if instance_running("/usr/bin/redshift"):
+    print("Redshift instance is already running")
+    sys.exit()
 
 try:
     response = urllib2.urlopen(url)
@@ -49,8 +55,9 @@ try:
     write_settings(settings_file, data)
 except:
     data = read_settings(expanduser(settings_file))
+    cached_data = True
 
-greet(data)
+greet(data, cached_data)
 
 # lat:lon
 args = "-l %s:%s" % (data[u'latitude'], data[u'longitude'])
