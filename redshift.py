@@ -16,7 +16,7 @@ def instance_running(name):
 
 
 def greet(data, cached_data):
-    print("--> %s, %s\n" % (data[u'city'], data[u'country_name']))
+    print("--> %s, %s" % (data[u'city'], data[u'country_name']))
     if cached_data:
         print("Using cached data")
     else:
@@ -45,10 +45,6 @@ cached_data = False
 
 print("Redshift launcher...")
 
-if instance_running("/usr/bin/redshift"):
-    print("Redshift instance is already running")
-    sys.exit()
-
 try:
     response = urllib2.urlopen(url)
     data = json.loads(response.read())
@@ -58,6 +54,10 @@ except:
     cached_data = True
 
 greet(data, cached_data)
+
+if instance_running("/usr/bin/redshift"):
+    print("Redshift instance is already running")
+    sys.exit()
 
 # lat:lon
 args = "-l %s:%s" % (data[u'latitude'], data[u'longitude'])
