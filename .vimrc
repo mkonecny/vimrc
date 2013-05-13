@@ -29,7 +29,7 @@ set backspace=indent,eol,start
 set guioptions-=l
 set go-=R
 set go-=L
-set tags=./tags
+set tags=./tags,tags,./../tags,./../../tags
 set ssop-=options "do not store global and local values in session
 set ssop-=folds "do not store folds
 "Spelling intereferes with colorschemes greatly. Hence it must go
@@ -39,8 +39,10 @@ set complete-=i "make completion ignore modules in the file system
 set fillchars=vert:│    " that's a vertical box-drawing character
 "}}}
 " Vundle {{{
+filetype off
 let g:vundle_default_git_proto='git'
 set rtp+=~/.vim/bundle/vundle
+set rtp+=~/reps/ctrlp.vim
 set rtp+=/usr/local/share/ocamlmerlin/vim
 call vundle#rc()
 Bundle 'gmarik/vundle'
@@ -48,6 +50,8 @@ Bundle 'gmarik/vundle'
 "Bundle 'vim-scripts/prev_indent'
 "Bundle 'vim-scripts/Align'
 Bundle 'godlygeek/tabular'
+Bundle 'spiiph/vim-space'
+Bundle 'dahu/SearchParty'
 "Bundle 'vim-scripts/Mark--Karkat'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'vim-scripts/SQLUtilities'
@@ -131,7 +135,7 @@ Bundle 'mileszs/ack.vim'
 "Doesn't play well with fuzzyfinder swithc buffer
 Bundle 'pangloss/vim-javascript'
 Bundle 'skammer/vim-css-color'
-Bundle 'kien/ctrlp.vim'
+"Bundle 'kien/ctrlp.vim'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-obsession'
 Bundle 'tpope/vim-rake'
@@ -270,10 +274,10 @@ vnoremap ,am :Tab /import<CR>
 let g:multi_cursor_use_default_mapping=0
 " plugin doesn't work atm
 " Default mapping
-"let g:multi_cursor_next_key="\<C-s>"
-"let g:multi_cursor_prev_key="\<C-p>"
-"let g:multi_cursor_skip_key="\<C-x>"
-"let g:multi_cursor_exit_key="\<Esc>"
+"let g:multi_cursor_next_key='<C-s>'
+"let g:multi_cursor_prev_key='<C-p>'
+"let g:multi_cursor_skip_key='<C-x>'
+"let g:multi_cursor_quit_key='<Esc>'
 "}}}
 "}}}
 " color theme settings {{{
@@ -396,8 +400,8 @@ autocmd FileType ruby compiler ruby
 "}}}
 " ocaml specifics {{{
 au FileType ocaml setlocal commentstring=(*%s*)
+au FileType ocaml setlocal comments=sr:(*,mb:*,ex:*)
 au FileType ocaml setlocal shiftwidth=2
-au FileType ocaml nnoremap ,ic T*ct*
 au FileType ocaml nnoremap ,o4 :! camlp4of % -printer o<CR>
 au FileType ocaml nnoremap <silent> \ss :call OCaml_switch(0)<CR>
 "TODO : fix this hard coded stuff
