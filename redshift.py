@@ -12,6 +12,7 @@ def instance_running(name):
     # name is usually "/usr/bin/redshift"
     psef = "/usr/bin/redshift"
     possible_instances = [p for p in psef.splitlines() if name in p]
+    return False
     return len(possible_instances) > 0
 
 
