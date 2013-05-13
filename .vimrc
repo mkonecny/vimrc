@@ -207,7 +207,7 @@ nnoremap <silent> <F5> :Git diff<CR>
 nnoremap <silent> <F6> :Reload<CR>:w<CR>
 nnoremap <F8> :Git pull<CR>
 nnoremap <C-F8> :Git push<CR>  
-nnoremap <silent> <F10> :edit!<CR>
+nnoremap <F10> :help <C-R><C-W><CR>
 nnoremap <silent> <F11> :GundoToggle<CR>
 "}}}
 " tab mappings {{{
@@ -286,7 +286,7 @@ if has('gui_running')
     "colorscheme inkpot
     colorscheme hickop
 else
-    colorscheme jellybeans
+    colorscheme default
 endif
 "}}}
 " laptop specifc settings{{{
