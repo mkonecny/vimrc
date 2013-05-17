@@ -51,7 +51,8 @@ Bundle 'gmarik/vundle'
 "Bundle 'vim-scripts/Align'
 Bundle 'godlygeek/tabular'
 Bundle 'spiiph/vim-space'
-Bundle 'dahu/SearchParty'
+Bundle 'kana/vim-smartinput'
+"Bundle 'dahu/SearchParty'
 "Bundle 'vim-scripts/Mark--Karkat'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'vim-scripts/SQLUtilities'
@@ -112,7 +113,6 @@ Bundle 'majutsushi/tagbar'
 "Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'ervandew/supertab'
-Bundle 'rson/vim-conque'
 "Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
@@ -468,6 +468,7 @@ let g:haddock_browser="/usr/bin/firefox"
 au FileType haskell compiler ghc
 autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <C-F1> :HdevtoolsInfo<CR>
 au FileType haskell nnoremap <buffer> <S-F1> :HdevtoolsClear<CR>
 "}}}
 " * UltiSnips settings {{{
