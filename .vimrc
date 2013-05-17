@@ -136,6 +136,7 @@ Bundle 'mileszs/ack.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'skammer/vim-css-color'
 "Bundle 'kien/ctrlp.vim'
+Bundle 'JazzCore/ctrlp-cmatcher'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-obsession'
 Bundle 'tpope/vim-rake'
@@ -190,6 +191,7 @@ nnoremap <silent> <C-f><C-r> :CtrlPClearAllCaches<CR>
 " as opposed to
 "nnoremap <silent> <C-f><C-r> :CtrlPClearCache<CR>
 let g:ctrlp_extensions = ['tag', 'quickfix', 'line', 'buffertag']
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 " fuf settings {{{
 let g:fuf_modesDisable=[]
 let g:fuf_mrufile_maxItem=1000
