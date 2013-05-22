@@ -52,6 +52,7 @@ Bundle 'gmarik/vundle'
 Bundle 'godlygeek/tabular'
 Bundle 'spiiph/vim-space'
 Bundle 'kana/vim-smartinput'
+Bundle 'AndrewRadev/switch.vim'
 "Bundle 'dahu/SearchParty'
 "Bundle 'vim-scripts/Mark--Karkat'
 Bundle 'davidhalter/jedi-vim'
@@ -59,6 +60,7 @@ Bundle 'vim-scripts/SQLUtilities'
 Bundle 'ivanov/vim-ipython'
 Bundle 'https://github.com/chreekat/vim-paren-crosshairs.git'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'zah/nimrod.vim'
 " <C-W>o to zoom/unzoom
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'nathanaelkane/vim-indent-guides'
@@ -70,7 +72,6 @@ Bundle 'maxbrunsfeld/vim-yankstack'
 Bundle 'michaeljsmith/vim-indent-object'
 Bundle 'SirVer/ultisnips'
 Bundle 'Shougo/vimproc'
-"Bundle 'Shougo/neocomplcache'
 Bundle 'eagletmt/ghcmod-vim'
 Bundle 'ujihisa/neco-ghc'
 "doesn't work unfortunately
@@ -88,14 +89,15 @@ Bundle 'kana/vim-textobj-user'
 Bundle 'ciaranm/inkpot'
 Bundle 'chrisv/vim-chrisv'
 Bundle 'darktango.vim'
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'Lokaltog/vim-powerline'
 "rainbow paren settings are commented out at the bottom
 "Bundle 'kien/rainbow_parentheses.vim'
 "included in distro nowadays
-"Bundle 'mirell/vim-matchit'
+Bundle 'Spaceghost/vim-matchit'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'vim-scripts/searchfold.vim'
 "Bundle 'vim-scripts/SearchComplete'
 "has annoying bugs
@@ -112,7 +114,7 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'majutsushi/tagbar'
 "Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
-Bundle 'ervandew/supertab'
+"Bundle 'ervandew/supertab'
 "Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tpope/vim-rails'
@@ -127,7 +129,7 @@ Bundle 'tpope/vim-rvm'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'vim-scripts/vimwiki'
 Bundle 'jpalardy/vim-slime'
-"Bundle 'xolog/vim-easytags'
+Bundle 'xolox/vim-easytags'
 "Bundle 'vim-scripts/taglist.vim'
 Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
@@ -221,8 +223,8 @@ nnoremap <silent> <C-S-tab> :tabprev<CR>
 " * splits maps {{{
 " TODO : fix this boilerplate
 nnoremap s <C-W>
-nnoremap - <C-W>-
-nnoremap + <C-W>+
+"nnoremap - <C-W>-
+"nnoremap + <C-W>+
 nnoremap <M-<> <C-W><
 nnoremap <M->> <C-W>>
 nnoremap <silent> <M-1> :1wincmd w<CR>
@@ -253,7 +255,8 @@ nnoremap ,aw :Ack! -w <C-R><C-W><CR>
 nnoremap ,ac :cd %:p:h<CR>:Ack! 
 nnoremap ,q :q!<CR>
 nnoremap ,m :bmodified<CR>
-nnoremap ,cc :pclose<CR>
+nnoremap ,cp :pclose<CR>
+nnoremap ,cc :cclose<CR>
 cnoremap w!! w !sudo dd of=%
 inoremap jk <esc>
 "open last search in quickfix window
@@ -264,6 +267,7 @@ vnoremap <silent> ,ql :! sqlasaservice.py<CR>
 nnoremap <silent> ,[[ V20<<<ESC>
 nnoremap <silent> ,re :w<CR>:Git checkout %<CR>
 nnoremap <silent> ,ds ciw <ESC>
+nnoremap <silent> - :Switch<CR>
 "}}}
 " alignment mappings {{{
 vnoremap ,a= :Tab /=<CR>
@@ -281,12 +285,16 @@ let g:multi_cursor_use_default_mapping=0
 "let g:multi_cursor_skip_key='<C-x>'
 "let g:multi_cursor_quit_key='<Esc>'
 "}}}
+"{{{ word wrap navigation
+nnoremap j gj
+nnoremap k gk
+"}}}
 "}}}
 " color theme settings {{{
 set background=dark
 if has('gui_running')
     "colorscheme inkpot
-    colorscheme hickop
+    colorscheme inkpot
 else
     colorscheme default
 endif
@@ -417,7 +425,7 @@ let g:syntastic_ocaml_checkers = ['merlin']
 "nnoremap <silent> <leader>. :call Ocaml_print_type("normal")<CR>
 "vnoremap <silent> <LocalLeader>. :<C-U>call Ocaml_print_type("visual")<CR>`<
 au FileType ocaml UltiSnipsAddFiletypes ocaml
-au FileType ocaml call SuperTabSetDefaultCompletionType("<c-x><c-o>")
+"au FileType ocaml call SuperTabSetDefaultCompletionType("<c-x><c-o>")
 hi EnclosingExpr guibg=Black
 "other (failed) attempts
 "hi link EnclosingExpr CursorLine 
@@ -472,10 +480,11 @@ autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
 au FileType haskell nnoremap <buffer> <C-F1> :HdevtoolsInfo<CR>
 au FileType haskell nnoremap <buffer> <S-F1> :HdevtoolsClear<CR>
+au FileType haskell setlocal tabstop=4 shiftwidth=4 expandtab
 "}}}
 " * UltiSnips settings {{{
 let g:UltiSnipsSnippetDirectories=["/home/rudi/.vim/bundle/ultisnips/UltiSnips/"]
-"let g:UltiSnipsExpandTrigger="<c-tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 "let g:UltiSnipsJumpForwardTrigger="<c-'>"
 "}}}
 "smart cwd settings {{{
@@ -490,5 +499,20 @@ function! s:setcwd()
 endfunction
 au BufEnter * call s:setcwd()
 "}}}
+"TODO : make this all OCaml specific
+let g:switch_custom_definitions = 
+            \ [
+            \ ['>=', '<='],
+            \ ['<>', '='],
+            \ ['<', '>'],
+            \ ['%s', '%d'],
+            \ ['[||]','[]'],
+            \ ['to','downto'],
+            \ ['(x,y)','(y,x)'],
+            \ ['incr', 'decr'],
+            \ ['let', 'let rec'],
+            \ ['a -> b', 'b -> a'],
+            \ ['failwith xx', 'raise (Invalid_argument xx)'],
+            \ ['if','if not']
+            \ ]
 " vim:fen:fdm=marker:fmr={{{,}}}:fdl=0:fdc=1:ts=2:sw=2:sts=2
-
