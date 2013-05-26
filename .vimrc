@@ -50,8 +50,10 @@ Bundle 'gmarik/vundle'
 "Bundle 'vim-scripts/prev_indent'
 "Bundle 'vim-scripts/Align'
 Bundle 'godlygeek/tabular'
+Bundle 'matthewtodd/vim-twilight'
 Bundle 'spiiph/vim-space'
 Bundle 'kana/vim-smartinput'
+Bundle 'flazz/vim-colorschemes'
 Bundle 'AndrewRadev/switch.vim'
 "Bundle 'dahu/SearchParty'
 "Bundle 'vim-scripts/Mark--Karkat'
@@ -129,7 +131,7 @@ Bundle 'tpope/vim-rvm'
 Bundle 'vim-scripts/bufkill.vim'
 Bundle 'vim-scripts/vimwiki'
 Bundle 'jpalardy/vim-slime'
-Bundle 'xolox/vim-easytags'
+"Bundle 'xolox/vim-easytags'
 "Bundle 'vim-scripts/taglist.vim'
 Bundle 'lukerandall/haskellmode-vim'
 Bundle 'mileszs/ack.vim'
@@ -268,6 +270,7 @@ nnoremap <silent> ,[[ V20<<<ESC>
 nnoremap <silent> ,re :w<CR>:Git checkout %<CR>
 nnoremap <silent> ,ds ciw <ESC>
 nnoremap <silent> - :Switch<CR>
+vnoremap <silent> \xx :g/^$/d<CR>:silent noh<CR>
 "}}}
 " alignment mappings {{{
 vnoremap ,a= :Tab /=<CR>
@@ -294,9 +297,9 @@ nnoremap k gk
 set background=dark
 if has('gui_running')
     "colorscheme inkpot
-    colorscheme inkpot
+    colorscheme jellyx
 else
-    colorscheme default
+    colorscheme jellyx
 endif
 "}}}
 " laptop specifc settings{{{
@@ -438,6 +441,7 @@ set nonumber
 au FileType * set nonumber
 set nosol
 set colorcolumn=80
+highlight ColorColumn ctermbg=59 guibg=#2c2d27
 au FileType css setlocal omnifunc=csscomplete#CompleteCSS
 au FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
